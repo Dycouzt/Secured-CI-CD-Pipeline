@@ -1,0 +1,3 @@
+# FLAW 4: Outdated and Vulnerable Dependency (for pip-audit/Trivy)
+# Flask 1.1.2 is known to have security vulnerabilities.
+Flask==1.1.2
