@@ -1,4 +1,3 @@
-import os
 import pickle
 import subprocess #-no-sec
 from base64 import b64decode
