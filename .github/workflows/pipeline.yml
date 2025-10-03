@@ -35,6 +35,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
+          # CORRECTED: Removed snyk and gitleaks from pip install, as they are not used.
+          # The official actions for these tools provide their own binaries.
           pip install bandit pytest
 
       # STAGE 4: Run Unit Tests
@@ -50,11 +52,11 @@ jobs:
           bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json
 
       # STAGE 6: Dependency Scanning (SCA) with Snyk
-      # CORRECTED: Using the official Snyk GitHub Action.
       - name: Run Snyk SCA Scan
         id: snyk-sca
         uses: snyk/actions/python@9adf32b1121593767fc3c057af55b55db032dc04
-        continue-on-error: true # Set to true to allow the pipeline to continue and upload the report. Snyk action will still fail the check on PRs.
+        # CORRECTED: Removed `continue-on-error: true`. The default behavior (false) correctly
+        # fails the job if vulnerabilities are found, which is the goal of "breaking the build".
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
@@ -64,8 +66,8 @@ jobs:
       - name: Run Gitleaks Secret Scan
         id: gitleaks-secrets
         uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
-        env:
-          GITLEAKS_ENABLE_EXIT_CODE: "true" # Ensures the action fails the job if secrets are found
+        # CORRECTED: The `env` block was incorrect for this action and has been removed.
+        # The gitleaks-action v2 fails with a non-zero exit code by default if leaks are found.
         with:
           report_path: results/gitleaks-report.json
           report_format: json

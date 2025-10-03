@@ -5,4 +5,5 @@ __pycache__/
 .env
 .DS_Store
 master_context.txt
+project_structure.txt
 
