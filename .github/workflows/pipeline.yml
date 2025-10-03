@@ -35,44 +35,45 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt
-          # CORRECTED: Removed snyk and gitleaks from pip install, as they are not used.
-          # The official actions for these tools provide their own binaries.
-          pip install bandit pytest
+          pip install bandit pytest flake8
 
-      # STAGE 4: Run Unit Tests
+      # STAGE 4: Run Linting
+      - name: Run Linting with Flake8
+        id: linting
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      # STAGE 5: Run Unit Tests
       - name: Run Unit Tests
         id: unit-tests
         run: |
           pytest tests/
 
-      # STAGE 5: Static Code Analysis (SAST) with Bandit
+      # STAGE 6: Static Code Analysis (SAST) with Bandit
       - name: Run Bandit SAST Scan
         id: bandit-sast
         run: |
-          bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json
+          bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json --exit-code 1 --severity-threshold high
 
-      # STAGE 6: Dependency Scanning (SCA) with Snyk
+      # STAGE 7: Dependency Scanning (SCA) with Snyk
       - name: Run Snyk SCA Scan
         id: snyk-sca
         uses: snyk/actions/python@9adf32b1121593767fc3c057af55b55db032dc04
-        # CORRECTED: Removed `continue-on-error: true`. The default behavior (false) correctly
-        # fails the job if vulnerabilities are found, which is the goal of "breaking the build".
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --file=app/requirements.txt --severity-threshold=high --json-file-output=results/snyk-report.json
 
-      # STAGE 7: Secret Detection with Gitleaks
+      # STAGE 8: Secret Detection with Gitleaks
       - name: Run Gitleaks Secret Scan
         id: gitleaks-secrets
         uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
-        # CORRECTED: The `env` block was incorrect for this action and has been removed.
-        # The gitleaks-action v2 fails with a non-zero exit code by default if leaks are found.
         with:
           report_path: results/gitleaks-report.json
           report_format: json
 
-      # STAGE 8: Build Docker Image
+      # STAGE 9: Build Docker Image
       - name: Set up Docker Buildx
         id: setup-buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435
@@ -87,7 +88,7 @@ jobs:
           load: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
 
-      # STAGE 9: Container Security Scan with Trivy
+      # STAGE 10: Container Security Scan with Trivy
       - name: Run Trivy Vulnerability Scanner
         id: trivy-scan
         uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
@@ -97,8 +98,15 @@ jobs:
           output: 'results/trivy-report.json'
           severity: 'HIGH,CRITICAL'
           exit-code: '1'
+          
+      # STAGE 11: DAST Placeholder
+      - name: DAST Placeholder
+        id: dast-placeholder
+        run: |
+          echo "DAST scan would run here. This is a placeholder."
+          echo "For a real implementation, you would use a tool like OWASP ZAP or a commercial DAST scanner."
 
-      # STAGE 10: Upload Scan Reports
+      # STAGE 12: Upload Scan Reports
       - name: Upload Security Scan Reports
         id: upload-reports
         if: always()
@@ -107,7 +115,7 @@ jobs:
           name: security-reports
           path: results/
 
-      # STAGE 11: Deploy to Docker Hub (Conditional)
+      # STAGE 13: Deploy to Docker Hub (Conditional)
       - name: Login to Docker Hub
         id: docker-login
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
