@@ -58,7 +58,7 @@ jobs:
       - name: Run Bandit SAST Scan
         id: bandit-sast
         run: |
-          bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json --exit-code 1 --severity-threshold high
+          bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json -l high --exit-code 1
 
       # STAGE 7: Dependency Scanning (SCA) with Snyk
       - name: Run Snyk SCA Scan
