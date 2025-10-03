@@ -15,21 +15,21 @@ jobs:
       security-events: write
 
     steps:
-      # STAGE 1: Checkout code
+      # STAGE 1.1: Checkout code
       - name: Checkout code
         id: checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
         with:
           fetch-depth: 0 # Required for Gitleaks to scan full history
 
-      # STAGE 2: Set up Python environment
+      # STAGE 1.2: Set up Python environment
       - name: Set up Python
         id: setup-python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.9'
 
-      # STAGE 3: Install dependencies
+      # STAGE 1.3: Install dependencies
       - name: Install Python dependencies
         id: install-deps
         run: |
@@ -37,20 +37,20 @@ jobs:
           pip install -r app/requirements.txt
           pip install bandit pytest flake8
 
-      # STAGE 4: Run Linting
+      # STAGE 2.1: Run Linting
       - name: Run Linting with Flake8
         id: linting
         run: |
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-      # STAGE 5: Run Unit Tests
+      # STAGE 2.2: Run Unit Tests
       - name: Run Unit Tests
         id: unit-tests
         run: |
           pytest tests/
 
-      # STAGE 6: Static Code Analysis (SAST) with Bandit
+      # STAGE 3.1: Static Code Analysis (SAST) with Bandit
       - name: Create results directory for Bandit
         id: create-bandit-results-dir
         run: mkdir -p results
@@ -60,7 +60,7 @@ jobs:
         run: |
           bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json --severity-level high
 
-      # STAGE 7: Dependency Scanning (SCA) with Snyk
+      # STAGE 3.2: Dependency Scanning (SCA) with Snyk
       - name: Run Snyk SCA Scan
         id: snyk-sca
         uses: snyk/actions/python@9adf32b1121593767fc3c057af55b55db032dc04
@@ -69,7 +69,7 @@ jobs:
         with:
           args: --file=app/requirements.txt --severity-threshold=high --json-file-output=results/snyk-report.json
 
-      # STAGE 8: Secret Detection with Gitleaks
+      # STAGE 3.3: Secret Detection with Gitleaks
       - name: Run Gitleaks Secret Scan
         id: gitleaks-secrets
         uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
@@ -77,11 +77,12 @@ jobs:
           report_path: results/gitleaks-report.json
           report_format: json
 
-      # STAGE 9: Build Docker Image
+      # STAGE 4.1: Set Up Docker Buildx
       - name: Set up Docker Buildx
         id: setup-buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435
-
+      
+      # STAGE 4.2: Build Docker Image
       - name: Build Docker image
         id: build-image
         uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25
@@ -92,7 +93,7 @@ jobs:
           load: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
 
-      # STAGE 10: Container Security Scan with Trivy
+      # STAGE 5.1: Container Security Scan with Trivy
       - name: Run Trivy Vulnerability Scanner
         id: trivy-scan
         uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
@@ -103,14 +104,14 @@ jobs:
           severity: 'HIGH,CRITICAL'
           exit-code: '1'
           
-      # STAGE 11: DAST Placeholder
+      # STAGE 5.2: DAST Placeholder
       - name: DAST Placeholder
         id: dast-placeholder
         run: |
           echo "DAST scan would run here. This is a placeholder."
           echo "For a real implementation, you would use a tool like OWASP ZAP or a commercial DAST scanner."
 
-      # STAGE 12: Upload Scan Reports
+      # STAGE 6.1: Upload Scan Reports
       - name: Upload Security Scan Reports
         id: upload-reports
         if: always()
@@ -119,7 +120,7 @@ jobs:
           name: security-reports
           path: results/
 
-      # STAGE 13: Deploy to Docker Hub (Conditional)
+      # STAGE 6.2: Authenticate To Docker Hub (Conditional)
       - name: Login to Docker Hub
         id: docker-login
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -128,6 +129,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # STAGE 6.3: Deploy to Docker Hub (Conditional)
       - name: Push to Docker Hub
         id: docker-push
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
