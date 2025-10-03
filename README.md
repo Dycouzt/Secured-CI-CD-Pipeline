@@ -4,7 +4,7 @@ This project demonstrates a production-grade, 11-stage secure CI/CD pipeline usi
 
 The pipeline automatically scans code, dependencies, secrets, and container images, failing the build if high-severity vulnerabilities are detected. This acts as a security gate, preventing insecure code from being merged or deployed.
 
-## 🚀 Project Goals
+## Project Goals
 
 -   **Automate Security:** Integrate security scanning directly into the CI/CD workflow.
 -   **Shift Left:** Detect and remediate vulnerabilities early in the development process.
@@ -22,6 +22,46 @@ The pipeline automatically scans code, dependencies, secrets, and container imag
 | **Docker**  | Containerization               | Packages the application and its dependencies into a container image.|
 | **GitHub Actions** | CI/CD Orchestration   | Automates the entire build, test, scan, and deploy workflow.         |
 
+### Pipeline Diagram
+
+´´´mermaid
+graph TD
+    %% Define the Start/Trigger Node
+    A[Push or Pull Request to 'main'] --> B(Checkout Code)
+
+    %% Define Sequential Stages
+    B --> C(Setup Environment)
+    C --> D(Install Dependencies)
+    D --> E(Run Unit Tests)
+
+    %% Define Security Gates Subgraph
+    subgraph Security Gates (Break Build on Failure)
+        E --> F{Bandit Scan};
+        F -- Pass --> G{Snyk Scan};
+        G -- Pass --> H{Gitleaks Scan};
+        H -- Pass --> I{Trivy Scan};
+        I -- Pass --> J(Upload Reports);
+        F -- Fail --> Z[Block Merge/Deploy];
+        G -- Fail --> Z;
+        H -- Fail --> Z;
+        I -- Fail --> Z;
+    end
+
+    %% Define Conditional Deployment and Final States
+    J --> K(Deploy to Registry)
+    K --> L[Deployment Complete]
+
+    %% Style Definitions
+    style A fill:#D4EDDA,stroke:#28A745,stroke-width:2px,color:#333;
+    style Z fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
+    style F fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
+    style G fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
+    style H fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
+    style I fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
+
+    %% Note for Upload Reports
+    note on J: (Runs even on failure, reports uploaded to artifact storage)
+´´´
 
 ## 🔧 How to Run
 
