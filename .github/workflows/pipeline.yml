@@ -1,0 +1,125 @@
+# .github/workflows/pipeline.yml
+name: DevSecOps CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # for actions/checkout
+      security-events: write # for github/codeql-action/upload-sarif
+
+    steps:
+      # STAGE 1: Checkout code
+      - name: Checkout code
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for Gitleaks to scan full history
+
+      # STAGE 2: Set up Python environment
+      - name: Set up Python
+        id: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      # STAGE 3: Install dependencies
+      - name: Install dependencies
+        id: install-deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r app/requirements.txt
+          pip install bandit pytest snyk gitleaks
+
+      # STAGE 4: Run Unit Tests
+      - name: Run Unit Tests
+        id: unit-tests
+        run: |
+          pytest tests/
+
+      # STAGE 5: Static Code Analysis (SAST) with Bandit
+      - name: Run Bandit SAST Scan
+        id: bandit-sast
+        run: |
+          bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json
+        # continue-on-error: true # Use this if you want the pipeline to continue even if this step fails, to see all reports.
+        # For a strict gate, `false` is the default and correct setting.
+
+      # STAGE 6: Dependency Scanning (SCA) with Snyk
+      - name: Run Snyk SCA Scan
+        id: snyk-sca
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          snyk test --file=app/requirements.txt --severity-threshold=high --json-file-output=results/snyk-report.json
+        # The `--severity-threshold=high` flag will cause Snyk to exit with a non-zero code if high or critical vulnerabilities are found.
+
+      # STAGE 7: Secret Detection with Gitleaks
+      - name: Run Gitleaks Secret Scan
+        id: gitleaks-secrets
+        run: |
+          gitleaks detect --source . --report-path results/gitleaks-report.json --report-format json --verbose --exit-code 1
+        # `--exit-code 1` ensures the job fails if secrets are found.
+
+      # STAGE 8: Build Docker Image
+      - name: Set up Docker Buildx
+        id: setup-buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        id: build-image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false # Do not push yet, we need to scan it first
+          load: true # Load the image into the local Docker daemon for scanning
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
+
+      # STAGE 9: Container Security Scan with Trivy
+      - name: Run Trivy Vulnerability Scanner
+        id: trivy-scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest'
+          format: 'json'
+          output: 'results/trivy-report.json'
+          severity: 'HIGH,CRITICAL' # Fail on HIGH or CRITICAL vulnerabilities
+          exit-code: '1' # Cause the workflow to fail if vulnerabilities are found
+
+      # STAGE 10: Upload Scan Reports
+      # This step runs regardless of previous failures to ensure reports are always available.
+      - name: Upload Security Scan Reports
+        id: upload-reports
+        if: always() # This ensures that reports are uploaded even if a previous step failed
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: results/
+
+      # STAGE 11: Deploy to Docker Hub (Conditional)
+      # This step only runs on the 'main' branch after a push event,
+      # and only if all previous security checks have passed.
+      - name: Login to Docker Hub
+        id: docker-login
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push to Docker Hub
+        id: docker-push
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
