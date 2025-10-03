@@ -51,6 +51,10 @@ jobs:
           pytest tests/
 
       # STAGE 6: Static Code Analysis (SAST) with Bandit
+      - name: Create results directory for Bandit
+        id: create-bandit-results-dir
+        run: mkdir -p results
+
       - name: Run Bandit SAST Scan
         id: bandit-sast
         run: |
