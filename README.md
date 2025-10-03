@@ -21,47 +21,43 @@ The pipeline automatically scans code, dependencies, secrets, and container imag
 | **Trivy**   | Container Image Scanning       | Scans container images for OS and application-level vulnerabilities. |
 | **Docker**  | Containerization               | Packages the application and its dependencies into a container image.|
 | **GitHub Actions** | CI/CD Orchestration   | Automates the entire build, test, scan, and deploy workflow.         |
+| **actions/checkout** | Checkout Code | `08eba0b27e820071cde6df949e0beb9ba4906955` |
+| **actions/setup-python** | Setup Python | `a26af69be951a213d495a4c3e4e4022e16d87065` |
+| **snyk/actions/python** | Dependency Scanning | `9adf32b1121593767fc3c057af55b55db032dc04` |
+| **gitleaks/gitleaks-action** | Secret Detection | `ff98106e4c7b2bc287b24eaf42907196329070c7` |
+| **docker/setup-buildx-action** | Docker Buildx Setup | `e468171a9de216ec08956ac3ada2f0791b6bd435` |
+| **docker/build-push-action** | Docker Build and Push | `ca052bb54ab0790a636c9b5f226502c73d547a25` |
+| **aquasecurity/trivy-action** | Container Scanning | `b6643a29fecd7f34b3597bc6acb0a98b03d33ff8` |
+| **actions/upload-artifact** | Upload Artifacts | `ea165f8d65b6e75b540449e92b4886f43607fa02` |
+| **docker/login-action** | Docker Login | `5e57cd118135c172c3672efd75eb46360885c0ef` |
 
 ### Pipeline Diagram
 
-´´´mermaid
+```mermaid
 graph TD
-    %% Define the Start/Trigger Node
-    A[Push or Pull Request to 'main'] --> B(Checkout Code)
+    A[Push or Pull Request to 'main'] --> B(Checkout Code);
+    B --> C(Set up Python);
+    C --> D(Install Dependencies);
+    D --> E(Run Unit Tests);
+    E --> F{Bandit Scan};
+    F --> G{Snyk Scan};
+    G --> H{Gitleaks Scan};
+    H --> I(Set up Docker Buildx);
+    I --> J(Build Docker image);
+    J --> K{Trivy Scan};
+    K --> L(Upload Reports);
+    L --> M(Login to Docker Hub);
+    M --> N(Push to Docker Hub);
 
-    %% Define Sequential Stages
-    B --> C(Setup Environment)
-    C --> D(Install Dependencies)
-    D --> E(Run Unit Tests)
-
-    %% Define Security Gates Subgraph
     subgraph Security Gates (Break Build on Failure)
-        E --> F{Bandit Scan};
-        F -- Pass --> G{Snyk Scan};
-        G -- Pass --> H{Gitleaks Scan};
-        H -- Pass --> I{Trivy Scan};
-        I -- Pass --> J(Upload Reports);
-        F -- Fail --> Z[Block Merge/Deploy];
-        G -- Fail --> Z;
-        H -- Fail --> Z;
-        I -- Fail --> Z;
+        F; G; H; K;
     end
 
-    %% Define Conditional Deployment and Final States
-    J --> K(Deploy to Registry)
-    K --> L[Deployment Complete]
-
-    %% Style Definitions
-    style A fill:#D4EDDA,stroke:#28A745,stroke-width:2px,color:#333;
-    style Z fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
     style F fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
     style G fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
     style H fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
-    style I fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
-
-    %% Note for Upload Reports
-    note on J: (Runs even on failure, reports uploaded to artifact storage)
-´´´
+    style K fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#333;
+```
 
 ## 🔧 How to Run
 
@@ -118,7 +114,7 @@ docker build -t my-secure-app:latest .
 trivy image my-secure-app:latest
 ```
 
-## 📊 Reading the Results
+## Reading the Results
 
 After a pipeline run, you can find all security reports in the "Actions" tab of your repository. Select the failed run and look for an artifact named `security-reports`. Download and unzip this file to view the JSON reports from Bandit, Snyk, Gitleaks, and Trivy.
 
@@ -127,7 +123,7 @@ After a pipeline run, you can find all security reports in the "Actions" tab of 
 -   **`gitleaks-report.json`**: Pinpoints the exact commit and line where a secret was found.
 -   **`trivy-report.json`**: Details vulnerabilities in the base image's OS packages and application dependencies.
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 By analyzing this project, you will understand:
 -   The practical implementation of "shift left" security.
@@ -135,3 +131,7 @@ By analyzing this project, you will understand:
 -   The role and function of SAST, SCA, secret scanning, and container scanning tools.
 -   How to configure security tools to fail a build based on vulnerability severity.
 -   Best practices for writing a secure, multi-stage `Dockerfile`.
+
+## Author
+
+Dycouzt - Diego Acosta
