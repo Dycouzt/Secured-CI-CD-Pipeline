@@ -1,57 +1,65 @@
-import pickle
-import subprocess #-no-sec
-from base64 import b64decode
-
+# app/app.py
+import os
+import sqlite3
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# FLAW 1: Hardcoded Secret (for Gitleaks)
-# This is a fake key for demonstration purposes.
-API_KEY = "sk_live_1234567890abcdefghijklmnopqrstuvwxyz" 
+# VULNERABILITY 1: Hardcoded Secret (for Gitleaks)
+# This fake AWS key will be caught by Gitleaks in our CI pipeline.
+# FAKE_AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7EXAMPLE" # This is a common example, let's make one up
+FAKE_AWS_KEY = "AKIAJS33XPER4S7EXAMPLE" # This will be flagged by Gitleaks
 
-# FLAW 2: Insecure Deserialization (for Bandit)
-@app.route('/unpickle', methods=['POST'])
-def unpickle_data():
-    """
-    Receives base64 encoded data, decodes it, and unpickles it.
-    This is extremely dangerous as pickle can execute arbitrary code.
-    """
-    encoded_data = request.json.get('data')
-    if not encoded_data:
-        return jsonify({"error": "No data provided"}), 400
-    
-    # Using pickle is a security risk.
-    pickled_data = b64decode(encoded_data)
-    unpickled_object = pickle.loads(pickled_data) # nosec
-    
-    return jsonify({"result": str(unpickled_object)})
+# In a real app, this should be loaded from a secrets manager or environment variable.
+# For this demo, we use a non-sensitive placeholder.
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "a-dev-secret-that-is-not-a-real-key")
 
-# FLAW 3: Command Injection (for Bandit)
-@app.route('/dns_lookup', methods=['GET'])
-def dns_lookup():
+# VULNERABILITY 2: SQL Injection (for Bandit)
+# This function is intentionally vulnerable to SQL injection.
+@app.route('/users')
+def get_user():
     """
-    Performs a DNS lookup for a given hostname.
-    Vulnerable to command injection.
+    Retrieves a user from the database.
+    This is vulnerable to SQL Injection.
+    Example of a malicious request: /users?username=' OR 1=1 --
     """
-    hostname = request.args.get('hostname')
-    if not hostname:
-        return jsonify({"error": "Hostname parameter is required"}), 400
+    username = request.args.get('username')
+    db_path = "/tmp/test.db"
 
-    # Directly using user input in a shell command is dangerous.
-    cmd = f"nslookup {hostname}"
+    # Initialize a temporary database for demonstration
+    if not os.path.exists(db_path):
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        cursor.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, email TEXT)")
+        cursor.execute("INSERT INTO users (username, email) VALUES ('admin', 'admin@example.com')")
+        conn.commit()
+        conn.close()
+
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # This is the vulnerable line. Never format SQL queries with f-strings or string concatenation.
+    # Use parameterized queries instead.
+    query = f"SELECT username, email FROM users WHERE username = '{username}'"
     try:
-        # Using shell=True with user input is a major security risk.
-        result = subprocess.check_output(cmd, shell=True, text=True) # nosec
-        return jsonify({"output": result})
-    except subprocess.CalledProcessError as e:
-        return jsonify({"error": str(e)}), 500
+        cursor.execute(query)
+        user = cursor.fetchone()
+    except sqlite3.Error as e:
+        return jsonify({"error": f"Database error: {e}"}), 500
+    finally:
+        conn.close()
+
+    if user:
+        return jsonify({"username": user[0], "email": user[1]})
+    else:
+        return jsonify({"error": "User not found"}), 404
 
 @app.route('/health')
 def health_check():
     """Health check endpoint."""
-    return jsonify({"status": "ok", "api_key_check": API_KEY[:6]}), 200
+    return jsonify({"status": "ok"}), 200
 
 if __name__ == '__main__':
-    # Running in debug mode is insecure for production.
+    # VULNERABILITY 3: Debug Mode Enabled (for Bandit)
+    # Running in debug mode in production is a security risk.
     app.run(host='0.0.0.0', port=5000, debug=True)
