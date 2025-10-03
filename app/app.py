@@ -8,13 +8,13 @@ app = Flask(__name__)
 # VULNERABILITY 1: Hardcoded Secret (for Gitleaks)
 # This fake AWS key will be caught by Gitleaks in our CI pipeline.
 # FAKE_AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7EXAMPLE" # This is a common example, let's make one up
-FAKE_AWS_KEY = "AKIAJS33XPER4S7EXAMPLE" # This will be flagged by Gitleaks
+FAKE_AWS_KEY = "AKIAJS33XPER4S7EXAMPLE" # This will be flagged by Gitleaks.
 
 # In a real app, this should be loaded from a secrets manager or environment variable.
 # For this demo, we use a non-sensitive placeholder.
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "a-dev-secret-that-is-not-a-real-key")
 
-# VULNERABILITY 2: SQL Injection (for Bandit)
+# VULNERABILITY 2: SQL Injection (for Bandit).
 # This function is intentionally vulnerable to SQL injection.
 @app.route('/users')
 def get_user():
