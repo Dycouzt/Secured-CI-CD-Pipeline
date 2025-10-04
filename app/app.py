@@ -1,4 +1,5 @@
-# app/app.py
+# app/app.py - Fixed Bandit vulnerabilities.
+
 import os
 import sqlite3
 from flask import Flask, request, jsonify
@@ -7,21 +8,18 @@ app = Flask(__name__)
 
 # VULNERABILITY 1: Hardcoded Secret (for Gitleaks)
 # This fake AWS key will be caught by Gitleaks in our CI pipeline.
-# FAKE_AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7EXAMPLE" # This is a common example, let's make one up
 FAKE_AWS_KEY = "AKIAJS33XPER4S7EXAMPLE" # This will be flagged by Gitleaks.
 
 # In a real app, this should be loaded from a secrets manager or environment variable.
 # For this demo, we use a non-sensitive placeholder.
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "a-dev-secret-that-is-not-a-real-key")
 
-# VULNERABILITY 2: SQL Injection (for Bandit).
-# This function is intentionally vulnerable to SQL injection.
+# FIXED: SQL Injection vulnerability - Now using parameterized queries
 @app.route('/users')
 def get_user():
     """
     Retrieves a user from the database.
-    This is vulnerable to SQL Injection.
-    Example of a malicious request: /users?username=' OR 1=1 --
+    NOW SECURE: Using parameterized queries to prevent SQL injection.
     """
     username = request.args.get('username')
     db_path = "/tmp/test.db"
@@ -38,11 +36,10 @@ def get_user():
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # This is the vulnerable line. Never format SQL queries with f-strings or string concatenation.
-    # Use parameterized queries instead.
-    query = f"SELECT username, email FROM users WHERE username = '{username}'"
+    # FIXED: Using parameterized query instead of string formatting
+    query = "SELECT username, email FROM users WHERE username = ?"
     try:
-        cursor.execute(query)
+        cursor.execute(query, (username,))
         user = cursor.fetchone()
     except sqlite3.Error as e:
         return jsonify({"error": f"Database error: {e}"}), 500
@@ -60,6 +57,7 @@ def health_check():
     return jsonify({"status": "ok"}), 200
 
 if __name__ == '__main__':
-    # VULNERABILITY 3: Debug Mode Enabled (for Bandit)
-    # Running in debug mode in production is a security risk.
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # FIXED: Debug mode disabled for production security
+    # Debug mode is now controlled by environment variable
+    debug_mode = os.environ.get("FLASK_DEBUG", "False").lower() == "true"
+    app.run(host='0.0.0.0', port=5000, debug=debug_mode)
