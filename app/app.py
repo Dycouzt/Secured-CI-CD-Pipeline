@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 # VULNERABILITY 1: Hardcoded Secret (for Gitleaks)
 # This fake AWS key will be caught by Gitleaks in our CI pipeline.
-FAKE_AWS_KEY = "AKIAIOSFODNN7EXAMPLE" # This will be flagged by Gitleaks.
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", None)
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", None)
 
 # In a real app, this should be loaded from a secrets manager or environment variable.
 # For this demo, we use a non-sensitive placeholder.
