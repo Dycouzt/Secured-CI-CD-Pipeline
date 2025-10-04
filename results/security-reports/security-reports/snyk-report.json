@@ -1,0 +1,2221 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "SNYK-PYTHON-FLASK-5490129",
+      "title": "Information Exposure",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "credit": [
+        "Tom Most"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,2.2.5)",
+          "[2.3.0,2.3.2)"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.2.5",
+        "2.3.2"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "flask",
+      "references": [
+        {
+          "url": "https://github.com/pallets/flask/commit/70f906c51ce49c485f1d355703e9cc3386b1cc2b",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/pallets/flask/commit/afd63b16170b7c047f5758eb910c416511e9c965",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/pallets/flask/pull/5109",
+          "title": "GitHub PR"
+        },
+        {
+          "url": "https://github.com/pallets/flask/releases/tag/2.2.5",
+          "title": "GitHub Release"
+        },
+        {
+          "url": "https://github.com/pallets/flask/releases/tag/2.3.2",
+          "title": "GitHub Release"
+        },
+        {
+          "url": "https://flask.palletsprojects.com/en/2.3.x/api/%23flask.session.permanent",
+          "title": "Session Cookie Documentation"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:53:13.063402Z"
+        },
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:54:01.212992Z"
+        },
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:53:15.543763Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-06T13:57:06.399073Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "NVD",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:53:13.063402Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:54:01.212992Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:53:15.543763Z"
+        }
+      ],
+      "description": "## Overview\n\nAffected versions of this package are vulnerable to Information Exposure in the form of exposing the permanent session cookie, when all of the following conditions are met:\r\n\r\n1) The application is hosted behind a caching proxy that does not strip cookies or ignore responses with cookies.\r\n\r\n2) The application sets `session.permanent = True`.\r\n\r\n3) The application does not access or modify the session at any point during a request.\r\n\r\n4) `SESSION_REFRESH_EACH_REQUEST` is enabled (the default).\r\n\r\n5) The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\r\n\r\nA response containing data intended for one client may be cached and sent to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. Under these conditions, the `Vary: Cookie` header is not set when a session is refreshed (re-sent to update the expiration) without being accessed or modified.\n## Remediation\nUpgrade `flask` to version 2.2.5, 2.3.2 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/flask/commit/70f906c51ce49c485f1d355703e9cc3386b1cc2b)\n- [GitHub Commit](https://github.com/pallets/flask/commit/afd63b16170b7c047f5758eb910c416511e9c965)\n- [GitHub PR](https://github.com/pallets/flask/pull/5109)\n- [GitHub Release](https://github.com/pallets/flask/releases/tag/2.2.5)\n- [GitHub Release](https://github.com/pallets/flask/releases/tag/2.3.2)\n- [Session Cookie Documentation](https://flask.palletsprojects.com/en/2.3.x/api/#flask.session.permanent)\n",
+      "epssDetails": {
+        "percentile": "0.44260",
+        "probability": "0.00215",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2023-30861"
+        ],
+        "CWE": [
+          "CWE-200"
+        ],
+        "GHSA": [
+          "GHSA-m2qf-hxjv-5gpq"
+        ]
+      },
+      "packageName": "flask",
+      "proprietary": false,
+      "creationTime": "2023-05-02T05:56:52.780757Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2023-05-01T19:22:20Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2023-05-02T07:57:54.707419Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2024-03-11T09:54:01.212992Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "flask@1.1.2"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "flask",
+      "version": "1.1.2"
+    },
+    {
+      "id": "SNYK-PYTHON-GUNICORN-6615672",
+      "title": "HTTP Request Smuggling",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N/E:P",
+      "credit": [
+        "Yadhu Krishna M"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,22.0.0)"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "22.0.0"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "gunicorn",
+      "references": [
+        {
+          "url": "https://github.com/benoitc/gunicorn/commit/ac29c9b0a758d21f1e0fb3b3457239e523fa9f1d",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/benoitc/gunicorn/releases/tag/23.0.0",
+          "title": "GitHub Release"
+        },
+        {
+          "url": "https://github.com/benoitc/gunicorn/blob/430dcdd997b955fa1a8569a07d9cdcbac686fb35/gunicorn/http/message.py%23L134",
+          "title": "Vulnerable Code"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-04-18T13:33:12.751076Z"
+        },
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+          "cvssV3BaseScore": 7.4,
+          "modificationTime": "2024-04-29T11:05:41.319724Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N/E:P",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-08-11T06:43:46.088459Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.0",
+          "modificationTime": "2024-04-18T13:33:12.751076Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7.4,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-04-29T11:05:41.319724Z"
+        }
+      ],
+      "description": "## Overview\n[gunicorn](http://gunicorn.org/) is a Python WSGI HTTP Server for UNIX\n\nAffected versions of this package are vulnerable to HTTP Request Smuggling due to the improper validation of `Transfer-Encoding` headers. An attacker can bypass security restrictions and access restricted endpoints by crafting requests with conflicting `Transfer-Encoding` headers. \r\n\r\n**Notes:**\r\n\r\n1) This is only exploitable if users have a network path which does not filter out invalid requests;\r\n\r\n2) Users are advised to block access to restricted endpoints via a firewall or other mechanism until a fix can be developed.\r\n\r\n3) This issue arises from the application's incorrectly processing of requests with multiple, conflicting `Transfer-Encoding` headers, treating them as chunked regardless of the final encoding specified.\n## Remediation\nUpgrade `gunicorn` to version 22.0.0 or higher.\n## References\n- [GitHub Commit](https://github.com/benoitc/gunicorn/commit/ac29c9b0a758d21f1e0fb3b3457239e523fa9f1d)\n- [GitHub Release](https://github.com/benoitc/gunicorn/releases/tag/23.0.0)\n- [Vulnerable Code](https://github.com/benoitc/gunicorn/blob/430dcdd997b955fa1a8569a07d9cdcbac686fb35/gunicorn/http/message.py#L134)\n",
+      "epssDetails": {
+        "percentile": "0.12974",
+        "probability": "0.00044",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2024-1135"
+        ],
+        "CWE": [
+          "CWE-444"
+        ],
+        "GHSA": [
+          "GHSA-w3h3-4rj7-4ph4"
+        ]
+      },
+      "packageName": "gunicorn",
+      "proprietary": false,
+      "creationTime": "2024-04-16T06:25:02.882232Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2024-04-16T00:30:32Z",
+      "exploitDetails": {
+        "sources": [
+          "Snyk"
+        ],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Proof of Concept",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Proof of Concept",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2024-04-16T08:54:07.325544Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2024-08-11T06:43:46.088459Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "gunicorn@20.1.0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "gunicorn",
+      "version": "20.1.0"
+    },
+    {
+      "id": "SNYK-PYTHON-GUNICORN-9510910",
+      "title": "HTTP Request Smuggling",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N/E:P",
+      "credit": [
+        "1nt3rc3pt0r"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,23.0.0)"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "23.0.0"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 8.7,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "gunicorn",
+      "references": [
+        {
+          "url": "https://github.com/benoitc/gunicorn/issues/3278",
+          "title": "GitHub Issue"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2025-03-26T11:03:43.004068Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:P",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 8.7,
+          "cvssVersion": "4.0",
+          "modificationTime": "2025-03-23T10:45:56.203170Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N/E:P",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2025-03-23T10:45:56.203170Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2025-03-26T11:03:43.004068Z"
+        }
+      ],
+      "description": "## Overview\n[gunicorn](http://gunicorn.org/) is a Python WSGI HTTP Server for UNIX\n\nAffected versions of this package are vulnerable to HTTP Request Smuggling due to improper validation of the `Transfer-Encoding` header. An attacker can manipulate session data, poison caches, or compromise data integrity by exploiting the fallback to `Content-Length` when `Transfer-Encoding` is not correctly handled.\n## PoC\n```\nPOST / HTTP/1.1\nHost: 172.24.10.169\nContent-Length: 6\nTransfer-Encoding: chunked,gzip\n\n73\n\nGET /admin?callback1=https://webhook.site/717269ae-8b97-4866-9a24-17ccef265a30 HTTP/1.1\nHost: 172.24.10.169\n\n0\n```\n## Remediation\nUpgrade `gunicorn` to version 23.0.0 or higher.\n## References\n- [GitHub Issue](https://github.com/benoitc/gunicorn/issues/3278)\n",
+      "epssDetails": {
+        "percentile": "0.03955",
+        "probability": "0.00021",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2024-6827"
+        ],
+        "CWE": [
+          "CWE-444"
+        ],
+        "GHSA": [
+          "GHSA-hc5x-x2vx-497g"
+        ]
+      },
+      "packageName": "gunicorn",
+      "proprietary": false,
+      "creationTime": "2025-03-23T10:45:55.907653Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2025-03-20T12:32:45Z",
+      "exploitDetails": {
+        "sources": [
+          "Snyk"
+        ],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Proof of Concept",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Proof of Concept",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2025-03-23T10:45:56.175086Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2025-03-26T11:03:43.004068Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "gunicorn@20.1.0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "gunicorn",
+      "version": "20.1.0"
+    },
+    {
+      "id": "SNYK-PYTHON-SETUPTOOLS-7448482",
+      "title": "Improper Control of Generation of Code ('Code Injection')",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:P",
+      "credit": [
+        "CybrX"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,70.0.0)"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "70.0.0"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "setuptools",
+      "references": [
+        {
+          "url": "https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/pypa/setuptools/issues/4331",
+          "title": "GitHub Issue"
+        },
+        {
+          "url": "https://github.com/pypa/setuptools/pull/4332",
+          "title": "GitHub PR"
+        },
+        {
+          "url": "https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5",
+          "title": "PoC"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 8.8,
+          "modificationTime": "2024-07-15T15:10:53.730467Z"
+        },
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 7,
+          "modificationTime": "2024-08-15T11:01:58.643024Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "4.0",
+          "modificationTime": "2024-08-24T15:25:03.939339Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:P",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-08-24T15:25:03.939339Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 8.8,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-07-15T15:10:53.730467Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-08-15T11:01:58.643024Z"
+        }
+      ],
+      "description": "## Overview\n\nAffected versions of this package are vulnerable to Improper Control of Generation of Code ('Code Injection') through the `package_index` module's download functions due to the unsafe usage of `os.system`. An attacker can execute arbitrary commands on the system by providing malicious URLs or manipulating the URLs retrieved from package index servers.\r\n\r\n**Note**\r\n\r\nBecause `easy_install` and `package_index` are deprecated, the exploitation surface is reduced, but it's conceivable through social engineering or minor compromise to a package index could grant remote access.\n## Remediation\nUpgrade `setuptools` to version 70.0.0 or higher.\n## References\n- [GitHub Commit](https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0)\n- [GitHub Issue](https://github.com/pypa/setuptools/issues/4331)\n- [GitHub PR](https://github.com/pypa/setuptools/pull/4332)\n- [PoC](https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5)\n",
+      "epssDetails": {
+        "percentile": "0.90004",
+        "probability": "0.05661",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2024-6345"
+        ],
+        "CWE": [
+          "CWE-94"
+        ]
+      },
+      "packageName": "setuptools",
+      "proprietary": false,
+      "creationTime": "2024-07-15T08:51:32.064092Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2024-07-15T00:39:51Z",
+      "exploitDetails": {
+        "sources": [
+          "Snyk"
+        ],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Proof of Concept",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Proof of Concept",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2024-07-15T08:51:32.353863Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2024-08-24T15:25:03.939339Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "gunicorn@20.1.0",
+        "setuptools@58.1.0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "setuptools",
+      "version": "58.1.0"
+    },
+    {
+      "id": "SNYK-PYTHON-WERKZEUG-3319936",
+      "title": "Denial of Service (DoS)",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "credit": [
+        "Jakob Ackermann"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,2.2.3)"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.2.3"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "werkzeug",
+      "references": [
+        {
+          "url": "https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/pallets/werkzeug/releases/tag/2.2.3",
+          "title": "GitHub Release"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:52:55.997093Z"
+        },
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:53:48.566913Z"
+        },
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:53:04.710946Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-06T13:55:37.366303Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "NVD",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:52:55.997093Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:53:48.566913Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:53:04.710946Z"
+        }
+      ],
+      "description": "## Overview\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when parsing multipart form data. An attacker can trigger the opening of multipart files containing a large number of file parts, which are processed using `request.data`, `request.form`, `request.files`, or `request.get_data(parse_form_data=False)`, consuming CPU, memory, or file handles resources. The amount of CPU time required can block worker processes from handling other requests. The amount of RAM required can trigger an out-of-memory and crash the process.\n\n## Details\n\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its intended and legitimate users.\n\nUnlike other vulnerabilities, DoS attacks usually do not aim at breaching security. Rather, they are focused on making websites and services unavailable to genuine users resulting in downtime.\n\nOne popular Denial of Service vulnerability is DDoS (a Distributed Denial of Service), an attack that attempts to clog network pipes to the system by generating a large volume of traffic from many machines.\n\nWhen it comes to open source libraries, DoS vulnerabilities allow attackers to trigger such a crash or crippling of the service by using a flaw either in the application code or from the use of open source libraries.\n\nTwo common types of DoS vulnerabilities:\n\n* High CPU/Memory Consumption- An attacker sending crafted requests that could cause the system to take a disproportionate amount of time to process. For example, [commons-fileupload:commons-fileupload](https://security.snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30082).\n\n* Crash - An attacker sending crafted requests that could cause the system to crash. For Example,  [npm `ws` package](https://snyk.io/vuln/npm:ws:20171108)\n\n## Remediation\nUpgrade `werkzeug` to version 2.2.3 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1)\n- [GitHub Release](https://github.com/pallets/werkzeug/releases/tag/2.2.3)\n",
+      "epssDetails": {
+        "percentile": "0.55653",
+        "probability": "0.00332",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2023-25577"
+        ],
+        "CWE": [
+          "CWE-770"
+        ],
+        "GHSA": [
+          "GHSA-xg9f-g7g7-2323"
+        ]
+      },
+      "packageName": "werkzeug",
+      "proprietary": false,
+      "creationTime": "2023-02-15T09:07:54.915104Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2023-02-15T08:36:53Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2023-02-15T09:23:26.929186Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2024-03-11T09:53:48.566913Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "werkzeug@1.0.1"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "werkzeug",
+      "version": "1.0.1"
+    },
+    {
+      "id": "SNYK-PYTHON-WERKZEUG-6808933",
+      "title": "Remote Code Execution (RCE)",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "credit": [
+        "RyotaK"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,3.0.3)"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "3.0.3"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "werkzeug",
+      "references": [
+        {
+          "url": "https://github.com/pallets/werkzeug/commit/71b69dfb7df3d912e66bab87fbb1f21f83504967",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/pallets/werkzeug/releases/tag/3.0.3",
+          "title": "GitHub Release"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-05-09T13:32:47.011978Z"
+        },
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-05-11T11:02:22.890220Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-05-06T07:25:10.516775Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-05-09T13:32:47.011978Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-05-11T11:02:22.890220Z"
+        }
+      ],
+      "description": "## Overview\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) due to insufficient hostname checks and the use of relative paths to resolve requests. When the debugger is enabled, an attacker can convince a user to enter their own PIN to interact with a domain and subdomain they control, and thereby cause malicious code to be executed.\r\n\r\nThe demonstrated attack vector requires a number of conditions that render this attack very difficult to achieve, especially if the victim application is running in the recommended configuration of not having the debugger enabled in production.\n## Remediation\nUpgrade `werkzeug` to version 3.0.3 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/werkzeug/commit/71b69dfb7df3d912e66bab87fbb1f21f83504967)\n- [GitHub Release](https://github.com/pallets/werkzeug/releases/tag/3.0.3)\n",
+      "epssDetails": {
+        "percentile": "0.44006",
+        "probability": "0.00212",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2024-34069"
+        ],
+        "CWE": [
+          "CWE-94"
+        ],
+        "GHSA": [
+          "GHSA-2g68-c3qc-8985"
+        ]
+      },
+      "packageName": "werkzeug",
+      "proprietary": false,
+      "creationTime": "2024-05-06T07:14:00.654405Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2024-05-06T01:48:44Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2024-05-06T07:25:10.516467Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2024-05-11T11:02:22.890220Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "werkzeug@1.0.1"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "werkzeug",
+      "version": "1.0.1"
+    },
+    {
+      "id": "SNYK-PYTHON-WERKZEUG-3319936",
+      "title": "Denial of Service (DoS)",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "credit": [
+        "Jakob Ackermann"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,2.2.3)"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.2.3"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "werkzeug",
+      "references": [
+        {
+          "url": "https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/pallets/werkzeug/releases/tag/2.2.3",
+          "title": "GitHub Release"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:52:55.997093Z"
+        },
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:53:48.566913Z"
+        },
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-03-11T09:53:04.710946Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-06T13:55:37.366303Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "NVD",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:52:55.997093Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:53:48.566913Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-03-11T09:53:04.710946Z"
+        }
+      ],
+      "description": "## Overview\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when parsing multipart form data. An attacker can trigger the opening of multipart files containing a large number of file parts, which are processed using `request.data`, `request.form`, `request.files`, or `request.get_data(parse_form_data=False)`, consuming CPU, memory, or file handles resources. The amount of CPU time required can block worker processes from handling other requests. The amount of RAM required can trigger an out-of-memory and crash the process.\n\n## Details\n\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its intended and legitimate users.\n\nUnlike other vulnerabilities, DoS attacks usually do not aim at breaching security. Rather, they are focused on making websites and services unavailable to genuine users resulting in downtime.\n\nOne popular Denial of Service vulnerability is DDoS (a Distributed Denial of Service), an attack that attempts to clog network pipes to the system by generating a large volume of traffic from many machines.\n\nWhen it comes to open source libraries, DoS vulnerabilities allow attackers to trigger such a crash or crippling of the service by using a flaw either in the application code or from the use of open source libraries.\n\nTwo common types of DoS vulnerabilities:\n\n* High CPU/Memory Consumption- An attacker sending crafted requests that could cause the system to take a disproportionate amount of time to process. For example, [commons-fileupload:commons-fileupload](https://security.snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30082).\n\n* Crash - An attacker sending crafted requests that could cause the system to crash. For Example,  [npm `ws` package](https://snyk.io/vuln/npm:ws:20171108)\n\n## Remediation\nUpgrade `werkzeug` to version 2.2.3 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1)\n- [GitHub Release](https://github.com/pallets/werkzeug/releases/tag/2.2.3)\n",
+      "epssDetails": {
+        "percentile": "0.55653",
+        "probability": "0.00332",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2023-25577"
+        ],
+        "CWE": [
+          "CWE-770"
+        ],
+        "GHSA": [
+          "GHSA-xg9f-g7g7-2323"
+        ]
+      },
+      "packageName": "werkzeug",
+      "proprietary": false,
+      "creationTime": "2023-02-15T09:07:54.915104Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2023-02-15T08:36:53Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2023-02-15T09:23:26.929186Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2024-03-11T09:53:48.566913Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "flask@1.1.2",
+        "werkzeug@1.0.1"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "werkzeug",
+      "version": "1.0.1"
+    },
+    {
+      "id": "SNYK-PYTHON-WERKZEUG-6808933",
+      "title": "Remote Code Execution (RCE)",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "credit": [
+        "RyotaK"
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,3.0.3)"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "3.0.3"
+      ],
+      "patches": [],
+      "insights": {
+        "triageAdvice": null
+      },
+      "language": "python",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "malicious": false,
+      "isDisputed": false,
+      "moduleName": "werkzeug",
+      "references": [
+        {
+          "url": "https://github.com/pallets/werkzeug/commit/71b69dfb7df3d912e66bab87fbb1f21f83504967",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/pallets/werkzeug/releases/tag/3.0.3",
+          "title": "GitHub Release"
+        }
+      ],
+      "cvssDetails": [
+        {
+          "assigner": "Red Hat",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-05-09T13:32:47.011978Z"
+        },
+        {
+          "assigner": "SUSE",
+          "severity": "high",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 7.5,
+          "modificationTime": "2024-05-11T11:02:22.890220Z"
+        }
+      ],
+      "cvssSources": [
+        {
+          "type": "primary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "Snyk",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-05-06T07:25:10.516775Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "Red Hat",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-05-09T13:32:47.011978Z"
+        },
+        {
+          "type": "secondary",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "assigner": "SUSE",
+          "severity": "high",
+          "baseScore": 7.5,
+          "cvssVersion": "3.1",
+          "modificationTime": "2024-05-11T11:02:22.890220Z"
+        }
+      ],
+      "description": "## Overview\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) due to insufficient hostname checks and the use of relative paths to resolve requests. When the debugger is enabled, an attacker can convince a user to enter their own PIN to interact with a domain and subdomain they control, and thereby cause malicious code to be executed.\r\n\r\nThe demonstrated attack vector requires a number of conditions that render this attack very difficult to achieve, especially if the victim application is running in the recommended configuration of not having the debugger enabled in production.\n## Remediation\nUpgrade `werkzeug` to version 3.0.3 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/werkzeug/commit/71b69dfb7df3d912e66bab87fbb1f21f83504967)\n- [GitHub Release](https://github.com/pallets/werkzeug/releases/tag/3.0.3)\n",
+      "epssDetails": {
+        "percentile": "0.44006",
+        "probability": "0.00212",
+        "modelVersion": "v2025.03.14"
+      },
+      "identifiers": {
+        "CVE": [
+          "CVE-2024-34069"
+        ],
+        "CWE": [
+          "CWE-94"
+        ],
+        "GHSA": [
+          "GHSA-2g68-c3qc-8985"
+        ]
+      },
+      "packageName": "werkzeug",
+      "proprietary": false,
+      "creationTime": "2024-05-06T07:14:00.654405Z",
+      "functions_new": [],
+      "alternativeIds": [],
+      "disclosureTime": "2024-05-06T01:48:44Z",
+      "exploitDetails": {
+        "sources": [],
+        "maturityLevels": [
+          {
+            "type": "secondary",
+            "level": "Not Defined",
+            "format": "CVSSv3"
+          },
+          {
+            "type": "primary",
+            "level": "Not Defined",
+            "format": "CVSSv4"
+          }
+        ]
+      },
+      "packageManager": "pip",
+      "publicationTime": "2024-05-06T07:25:10.516467Z",
+      "severityBasedOn": "CVSS",
+      "modificationTime": "2024-05-11T11:02:22.890220Z",
+      "socialTrendAlert": false,
+      "severityWithCritical": "high",
+      "from": [
+        "app@0.0.0",
+        "flask@1.1.2",
+        "werkzeug@1.0.1"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "werkzeug",
+      "version": "1.0.1"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 9,
+  "org": "dycouzt",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.1\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "AGPL-3.0": {
+        "licenseType": "AGPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "Artistic-1.0": {
+        "licenseType": "Artistic-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "Artistic-2.0": {
+        "licenseType": "Artistic-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CDDL-1.0": {
+        "licenseType": "CDDL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CPOL-1.02": {
+        "licenseType": "CPOL-1.02",
+        "severity": "high",
+        "instructions": ""
+      },
+      "EPL-1.0": {
+        "licenseType": "EPL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "GPL-2.0": {
+        "licenseType": "GPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "LGPL-2.0": {
+        "licenseType": "LGPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-2.1": {
+        "licenseType": "LGPL-2.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-3.0": {
+        "licenseType": "LGPL-3.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-1.1": {
+        "licenseType": "MPL-1.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-2.0": {
+        "licenseType": "MPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MS-RL": {
+        "licenseType": "MS-RL",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "SimPL-2.0": {
+        "licenseType": "SimPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      }
+    }
+  },
+  "packageManager": "pip",
+  "ignoreSettings": {
+    "adminOnly": false,
+    "reasonRequired": false,
+    "disregardFilesystemIgnores": false
+  },
+  "summary": "8 high or critical severity vulnerable dependency paths",
+  "severityThreshold": "high",
+  "remediation": {
+    "unresolved": [
+      {
+        "id": "SNYK-PYTHON-FLASK-5490129",
+        "title": "Information Exposure",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+        "credit": [
+          "Tom Most"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,2.2.5)",
+            "[2.3.0,2.3.2)"
+          ]
+        },
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.2.5",
+          "2.3.2"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "python",
+        "severity": "high",
+        "cvssScore": 7.5,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "flask",
+        "references": [
+          {
+            "url": "https://github.com/pallets/flask/commit/70f906c51ce49c485f1d355703e9cc3386b1cc2b",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://github.com/pallets/flask/commit/afd63b16170b7c047f5758eb910c416511e9c965",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://github.com/pallets/flask/pull/5109",
+            "title": "GitHub PR"
+          },
+          {
+            "url": "https://github.com/pallets/flask/releases/tag/2.2.5",
+            "title": "GitHub Release"
+          },
+          {
+            "url": "https://github.com/pallets/flask/releases/tag/2.3.2",
+            "title": "GitHub Release"
+          },
+          {
+            "url": "https://flask.palletsprojects.com/en/2.3.x/api/%23flask.session.permanent",
+            "title": "Session Cookie Documentation"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "NVD",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-03-11T09:53:13.063402Z"
+          },
+          {
+            "assigner": "Red Hat",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-03-11T09:54:01.212992Z"
+          },
+          {
+            "assigner": "SUSE",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-03-11T09:53:15.543763Z"
+          }
+        ],
+        "cvssSources": [
+          {
+            "type": "primary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-06T13:57:06.399073Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "assigner": "NVD",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-11T09:53:13.063402Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "assigner": "Red Hat",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-11T09:54:01.212992Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "assigner": "SUSE",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-11T09:53:15.543763Z"
+          }
+        ],
+        "description": "## Overview\n\nAffected versions of this package are vulnerable to Information Exposure in the form of exposing the permanent session cookie, when all of the following conditions are met:\r\n\r\n1) The application is hosted behind a caching proxy that does not strip cookies or ignore responses with cookies.\r\n\r\n2) The application sets `session.permanent = True`.\r\n\r\n3) The application does not access or modify the session at any point during a request.\r\n\r\n4) `SESSION_REFRESH_EACH_REQUEST` is enabled (the default).\r\n\r\n5) The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\r\n\r\nA response containing data intended for one client may be cached and sent to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. Under these conditions, the `Vary: Cookie` header is not set when a session is refreshed (re-sent to update the expiration) without being accessed or modified.\n## Remediation\nUpgrade `flask` to version 2.2.5, 2.3.2 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/flask/commit/70f906c51ce49c485f1d355703e9cc3386b1cc2b)\n- [GitHub Commit](https://github.com/pallets/flask/commit/afd63b16170b7c047f5758eb910c416511e9c965)\n- [GitHub PR](https://github.com/pallets/flask/pull/5109)\n- [GitHub Release](https://github.com/pallets/flask/releases/tag/2.2.5)\n- [GitHub Release](https://github.com/pallets/flask/releases/tag/2.3.2)\n- [Session Cookie Documentation](https://flask.palletsprojects.com/en/2.3.x/api/#flask.session.permanent)\n",
+        "epssDetails": {
+          "percentile": "0.44260",
+          "probability": "0.00215",
+          "modelVersion": "v2025.03.14"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2023-30861"
+          ],
+          "CWE": [
+            "CWE-200"
+          ],
+          "GHSA": [
+            "GHSA-m2qf-hxjv-5gpq"
+          ]
+        },
+        "packageName": "flask",
+        "proprietary": false,
+        "creationTime": "2023-05-02T05:56:52.780757Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2023-05-01T19:22:20Z",
+        "exploitDetails": {
+          "sources": [],
+          "maturityLevels": [
+            {
+              "type": "secondary",
+              "level": "Not Defined",
+              "format": "CVSSv3"
+            },
+            {
+              "type": "primary",
+              "level": "Not Defined",
+              "format": "CVSSv4"
+            }
+          ]
+        },
+        "packageManager": "pip",
+        "publicationTime": "2023-05-02T07:57:54.707419Z",
+        "severityBasedOn": "CVSS",
+        "modificationTime": "2024-03-11T09:54:01.212992Z",
+        "socialTrendAlert": false,
+        "packagePopularityRank": 99,
+        "from": [
+          "app@0.0.0",
+          "flask@1.1.2"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "isRuntime": false,
+        "name": "flask",
+        "version": "1.1.2",
+        "severityWithCritical": "high"
+      },
+      {
+        "id": "SNYK-PYTHON-GUNICORN-6615672",
+        "title": "HTTP Request Smuggling",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N/E:P",
+        "credit": [
+          "Yadhu Krishna M"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,22.0.0)"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "22.0.0"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "python",
+        "severity": "high",
+        "cvssScore": 7.5,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "gunicorn",
+        "references": [
+          {
+            "url": "https://github.com/benoitc/gunicorn/commit/ac29c9b0a758d21f1e0fb3b3457239e523fa9f1d",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://github.com/benoitc/gunicorn/releases/tag/23.0.0",
+            "title": "GitHub Release"
+          },
+          {
+            "url": "https://github.com/benoitc/gunicorn/blob/430dcdd997b955fa1a8569a07d9cdcbac686fb35/gunicorn/http/message.py%23L134",
+            "title": "Vulnerable Code"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "Red Hat",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-04-18T13:33:12.751076Z"
+          },
+          {
+            "assigner": "SUSE",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "cvssV3BaseScore": 7.4,
+            "modificationTime": "2024-04-29T11:05:41.319724Z"
+          }
+        ],
+        "cvssSources": [
+          {
+            "type": "primary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N/E:P",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-08-11T06:43:46.088459Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+            "assigner": "Red Hat",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.0",
+            "modificationTime": "2024-04-18T13:33:12.751076Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "assigner": "SUSE",
+            "severity": "high",
+            "baseScore": 7.4,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-04-29T11:05:41.319724Z"
+          }
+        ],
+        "description": "## Overview\n[gunicorn](http://gunicorn.org/) is a Python WSGI HTTP Server for UNIX\n\nAffected versions of this package are vulnerable to HTTP Request Smuggling due to the improper validation of `Transfer-Encoding` headers. An attacker can bypass security restrictions and access restricted endpoints by crafting requests with conflicting `Transfer-Encoding` headers. \r\n\r\n**Notes:**\r\n\r\n1) This is only exploitable if users have a network path which does not filter out invalid requests;\r\n\r\n2) Users are advised to block access to restricted endpoints via a firewall or other mechanism until a fix can be developed.\r\n\r\n3) This issue arises from the application's incorrectly processing of requests with multiple, conflicting `Transfer-Encoding` headers, treating them as chunked regardless of the final encoding specified.\n## Remediation\nUpgrade `gunicorn` to version 22.0.0 or higher.\n## References\n- [GitHub Commit](https://github.com/benoitc/gunicorn/commit/ac29c9b0a758d21f1e0fb3b3457239e523fa9f1d)\n- [GitHub Release](https://github.com/benoitc/gunicorn/releases/tag/23.0.0)\n- [Vulnerable Code](https://github.com/benoitc/gunicorn/blob/430dcdd997b955fa1a8569a07d9cdcbac686fb35/gunicorn/http/message.py#L134)\n",
+        "epssDetails": {
+          "percentile": "0.12974",
+          "probability": "0.00044",
+          "modelVersion": "v2025.03.14"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2024-1135"
+          ],
+          "CWE": [
+            "CWE-444"
+          ],
+          "GHSA": [
+            "GHSA-w3h3-4rj7-4ph4"
+          ]
+        },
+        "packageName": "gunicorn",
+        "proprietary": false,
+        "creationTime": "2024-04-16T06:25:02.882232Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2024-04-16T00:30:32Z",
+        "exploitDetails": {
+          "sources": [
+            "Snyk"
+          ],
+          "maturityLevels": [
+            {
+              "type": "secondary",
+              "level": "Proof of Concept",
+              "format": "CVSSv3"
+            },
+            {
+              "type": "primary",
+              "level": "Proof of Concept",
+              "format": "CVSSv4"
+            }
+          ]
+        },
+        "packageManager": "pip",
+        "publicationTime": "2024-04-16T08:54:07.325544Z",
+        "severityBasedOn": "CVSS",
+        "modificationTime": "2024-08-11T06:43:46.088459Z",
+        "socialTrendAlert": false,
+        "packagePopularityRank": 99,
+        "from": [
+          "app@0.0.0",
+          "gunicorn@20.1.0"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "isRuntime": false,
+        "name": "gunicorn",
+        "version": "20.1.0",
+        "severityWithCritical": "high"
+      },
+      {
+        "id": "SNYK-PYTHON-GUNICORN-9510910",
+        "title": "HTTP Request Smuggling",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N/E:P",
+        "credit": [
+          "1nt3rc3pt0r"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,23.0.0)"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "23.0.0"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "python",
+        "severity": "high",
+        "cvssScore": 8.7,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "gunicorn",
+        "references": [
+          {
+            "url": "https://github.com/benoitc/gunicorn/issues/3278",
+            "title": "GitHub Issue"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "SUSE",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2025-03-26T11:03:43.004068Z"
+          }
+        ],
+        "cvssSources": [
+          {
+            "type": "primary",
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N/E:P",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 8.7,
+            "cvssVersion": "4.0",
+            "modificationTime": "2025-03-23T10:45:56.203170Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N/E:P",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2025-03-23T10:45:56.203170Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "assigner": "SUSE",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2025-03-26T11:03:43.004068Z"
+          }
+        ],
+        "description": "## Overview\n[gunicorn](http://gunicorn.org/) is a Python WSGI HTTP Server for UNIX\n\nAffected versions of this package are vulnerable to HTTP Request Smuggling due to improper validation of the `Transfer-Encoding` header. An attacker can manipulate session data, poison caches, or compromise data integrity by exploiting the fallback to `Content-Length` when `Transfer-Encoding` is not correctly handled.\n## PoC\n```\nPOST / HTTP/1.1\nHost: 172.24.10.169\nContent-Length: 6\nTransfer-Encoding: chunked,gzip\n\n73\n\nGET /admin?callback1=https://webhook.site/717269ae-8b97-4866-9a24-17ccef265a30 HTTP/1.1\nHost: 172.24.10.169\n\n0\n```\n## Remediation\nUpgrade `gunicorn` to version 23.0.0 or higher.\n## References\n- [GitHub Issue](https://github.com/benoitc/gunicorn/issues/3278)\n",
+        "epssDetails": {
+          "percentile": "0.03955",
+          "probability": "0.00021",
+          "modelVersion": "v2025.03.14"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2024-6827"
+          ],
+          "CWE": [
+            "CWE-444"
+          ],
+          "GHSA": [
+            "GHSA-hc5x-x2vx-497g"
+          ]
+        },
+        "packageName": "gunicorn",
+        "proprietary": false,
+        "creationTime": "2025-03-23T10:45:55.907653Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2025-03-20T12:32:45Z",
+        "exploitDetails": {
+          "sources": [
+            "Snyk"
+          ],
+          "maturityLevels": [
+            {
+              "type": "secondary",
+              "level": "Proof of Concept",
+              "format": "CVSSv3"
+            },
+            {
+              "type": "primary",
+              "level": "Proof of Concept",
+              "format": "CVSSv4"
+            }
+          ]
+        },
+        "packageManager": "pip",
+        "publicationTime": "2025-03-23T10:45:56.175086Z",
+        "severityBasedOn": "CVSS",
+        "modificationTime": "2025-03-26T11:03:43.004068Z",
+        "socialTrendAlert": false,
+        "packagePopularityRank": 99,
+        "from": [
+          "app@0.0.0",
+          "gunicorn@20.1.0"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "isRuntime": false,
+        "name": "gunicorn",
+        "version": "20.1.0",
+        "severityWithCritical": "high"
+      },
+      {
+        "id": "SNYK-PYTHON-SETUPTOOLS-7448482",
+        "title": "Improper Control of Generation of Code ('Code Injection')",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:P",
+        "credit": [
+          "CybrX"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,70.0.0)"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "70.0.0"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "python",
+        "severity": "high",
+        "cvssScore": 7.5,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "setuptools",
+        "references": [
+          {
+            "url": "https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://github.com/pypa/setuptools/issues/4331",
+            "title": "GitHub Issue"
+          },
+          {
+            "url": "https://github.com/pypa/setuptools/pull/4332",
+            "title": "GitHub PR"
+          },
+          {
+            "url": "https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5",
+            "title": "PoC"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "Red Hat",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "cvssV3BaseScore": 8.8,
+            "modificationTime": "2024-07-15T15:10:53.730467Z"
+          },
+          {
+            "assigner": "SUSE",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "cvssV3BaseScore": 7,
+            "modificationTime": "2024-08-15T11:01:58.643024Z"
+          }
+        ],
+        "cvssSources": [
+          {
+            "type": "primary",
+            "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "4.0",
+            "modificationTime": "2024-08-24T15:25:03.939339Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:P",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-08-24T15:25:03.939339Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "assigner": "Red Hat",
+            "severity": "high",
+            "baseScore": 8.8,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-07-15T15:10:53.730467Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "assigner": "SUSE",
+            "severity": "high",
+            "baseScore": 7,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-08-15T11:01:58.643024Z"
+          }
+        ],
+        "description": "## Overview\n\nAffected versions of this package are vulnerable to Improper Control of Generation of Code ('Code Injection') through the `package_index` module's download functions due to the unsafe usage of `os.system`. An attacker can execute arbitrary commands on the system by providing malicious URLs or manipulating the URLs retrieved from package index servers.\r\n\r\n**Note**\r\n\r\nBecause `easy_install` and `package_index` are deprecated, the exploitation surface is reduced, but it's conceivable through social engineering or minor compromise to a package index could grant remote access.\n## Remediation\nUpgrade `setuptools` to version 70.0.0 or higher.\n## References\n- [GitHub Commit](https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0)\n- [GitHub Issue](https://github.com/pypa/setuptools/issues/4331)\n- [GitHub PR](https://github.com/pypa/setuptools/pull/4332)\n- [PoC](https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5)\n",
+        "epssDetails": {
+          "percentile": "0.90004",
+          "probability": "0.05661",
+          "modelVersion": "v2025.03.14"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2024-6345"
+          ],
+          "CWE": [
+            "CWE-94"
+          ]
+        },
+        "packageName": "setuptools",
+        "proprietary": false,
+        "creationTime": "2024-07-15T08:51:32.064092Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2024-07-15T00:39:51Z",
+        "exploitDetails": {
+          "sources": [
+            "Snyk"
+          ],
+          "maturityLevels": [
+            {
+              "type": "secondary",
+              "level": "Proof of Concept",
+              "format": "CVSSv3"
+            },
+            {
+              "type": "primary",
+              "level": "Proof of Concept",
+              "format": "CVSSv4"
+            }
+          ]
+        },
+        "packageManager": "pip",
+        "publicationTime": "2024-07-15T08:51:32.353863Z",
+        "severityBasedOn": "CVSS",
+        "modificationTime": "2024-08-24T15:25:03.939339Z",
+        "socialTrendAlert": false,
+        "packagePopularityRank": 99,
+        "from": [
+          "app@0.0.0",
+          "gunicorn@20.1.0",
+          "setuptools@58.1.0"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "isRuntime": false,
+        "name": "setuptools",
+        "version": "58.1.0",
+        "severityWithCritical": "high"
+      },
+      {
+        "id": "SNYK-PYTHON-WERKZEUG-3319936",
+        "title": "Denial of Service (DoS)",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "credit": [
+          "Jakob Ackermann"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,2.2.3)"
+          ]
+        },
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.2.3"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "python",
+        "severity": "high",
+        "cvssScore": 7.5,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "werkzeug",
+        "references": [
+          {
+            "url": "https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://github.com/pallets/werkzeug/releases/tag/2.2.3",
+            "title": "GitHub Release"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "NVD",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-03-11T09:52:55.997093Z"
+          },
+          {
+            "assigner": "Red Hat",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-03-11T09:53:48.566913Z"
+          },
+          {
+            "assigner": "SUSE",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-03-11T09:53:04.710946Z"
+          }
+        ],
+        "cvssSources": [
+          {
+            "type": "primary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-06T13:55:37.366303Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "assigner": "NVD",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-11T09:52:55.997093Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "assigner": "Red Hat",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-11T09:53:48.566913Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "assigner": "SUSE",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-03-11T09:53:04.710946Z"
+          }
+        ],
+        "description": "## Overview\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when parsing multipart form data. An attacker can trigger the opening of multipart files containing a large number of file parts, which are processed using `request.data`, `request.form`, `request.files`, or `request.get_data(parse_form_data=False)`, consuming CPU, memory, or file handles resources. The amount of CPU time required can block worker processes from handling other requests. The amount of RAM required can trigger an out-of-memory and crash the process.\n\n## Details\n\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its intended and legitimate users.\n\nUnlike other vulnerabilities, DoS attacks usually do not aim at breaching security. Rather, they are focused on making websites and services unavailable to genuine users resulting in downtime.\n\nOne popular Denial of Service vulnerability is DDoS (a Distributed Denial of Service), an attack that attempts to clog network pipes to the system by generating a large volume of traffic from many machines.\n\nWhen it comes to open source libraries, DoS vulnerabilities allow attackers to trigger such a crash or crippling of the service by using a flaw either in the application code or from the use of open source libraries.\n\nTwo common types of DoS vulnerabilities:\n\n* High CPU/Memory Consumption- An attacker sending crafted requests that could cause the system to take a disproportionate amount of time to process. For example, [commons-fileupload:commons-fileupload](https://security.snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30082).\n\n* Crash - An attacker sending crafted requests that could cause the system to crash. For Example,  [npm `ws` package](https://snyk.io/vuln/npm:ws:20171108)\n\n## Remediation\nUpgrade `werkzeug` to version 2.2.3 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1)\n- [GitHub Release](https://github.com/pallets/werkzeug/releases/tag/2.2.3)\n",
+        "epssDetails": {
+          "percentile": "0.55653",
+          "probability": "0.00332",
+          "modelVersion": "v2025.03.14"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2023-25577"
+          ],
+          "CWE": [
+            "CWE-770"
+          ],
+          "GHSA": [
+            "GHSA-xg9f-g7g7-2323"
+          ]
+        },
+        "packageName": "werkzeug",
+        "proprietary": false,
+        "creationTime": "2023-02-15T09:07:54.915104Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2023-02-15T08:36:53Z",
+        "exploitDetails": {
+          "sources": [],
+          "maturityLevels": [
+            {
+              "type": "secondary",
+              "level": "Not Defined",
+              "format": "CVSSv3"
+            },
+            {
+              "type": "primary",
+              "level": "Not Defined",
+              "format": "CVSSv4"
+            }
+          ]
+        },
+        "packageManager": "pip",
+        "publicationTime": "2023-02-15T09:23:26.929186Z",
+        "severityBasedOn": "CVSS",
+        "modificationTime": "2024-03-11T09:53:48.566913Z",
+        "socialTrendAlert": false,
+        "packagePopularityRank": 99,
+        "from": [
+          "app@0.0.0",
+          "flask@1.1.2",
+          "werkzeug@1.0.1"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "isRuntime": false,
+        "name": "werkzeug",
+        "version": "1.0.1",
+        "severityWithCritical": "high"
+      },
+      {
+        "id": "SNYK-PYTHON-WERKZEUG-6808933",
+        "title": "Remote Code Execution (RCE)",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "credit": [
+          "RyotaK"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,3.0.3)"
+          ]
+        },
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "3.0.3"
+        ],
+        "patches": [],
+        "insights": {
+          "triageAdvice": null
+        },
+        "language": "python",
+        "severity": "high",
+        "cvssScore": 7.5,
+        "functions": [],
+        "malicious": false,
+        "isDisputed": false,
+        "moduleName": "werkzeug",
+        "references": [
+          {
+            "url": "https://github.com/pallets/werkzeug/commit/71b69dfb7df3d912e66bab87fbb1f21f83504967",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://github.com/pallets/werkzeug/releases/tag/3.0.3",
+            "title": "GitHub Release"
+          }
+        ],
+        "cvssDetails": [
+          {
+            "assigner": "Red Hat",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-05-09T13:32:47.011978Z"
+          },
+          {
+            "assigner": "SUSE",
+            "severity": "high",
+            "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "cvssV3BaseScore": 7.5,
+            "modificationTime": "2024-05-11T11:02:22.890220Z"
+          }
+        ],
+        "cvssSources": [
+          {
+            "type": "primary",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "assigner": "Snyk",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-05-06T07:25:10.516775Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "assigner": "Red Hat",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-05-09T13:32:47.011978Z"
+          },
+          {
+            "type": "secondary",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "assigner": "SUSE",
+            "severity": "high",
+            "baseScore": 7.5,
+            "cvssVersion": "3.1",
+            "modificationTime": "2024-05-11T11:02:22.890220Z"
+          }
+        ],
+        "description": "## Overview\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) due to insufficient hostname checks and the use of relative paths to resolve requests. When the debugger is enabled, an attacker can convince a user to enter their own PIN to interact with a domain and subdomain they control, and thereby cause malicious code to be executed.\r\n\r\nThe demonstrated attack vector requires a number of conditions that render this attack very difficult to achieve, especially if the victim application is running in the recommended configuration of not having the debugger enabled in production.\n## Remediation\nUpgrade `werkzeug` to version 3.0.3 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/werkzeug/commit/71b69dfb7df3d912e66bab87fbb1f21f83504967)\n- [GitHub Release](https://github.com/pallets/werkzeug/releases/tag/3.0.3)\n",
+        "epssDetails": {
+          "percentile": "0.44006",
+          "probability": "0.00212",
+          "modelVersion": "v2025.03.14"
+        },
+        "identifiers": {
+          "CVE": [
+            "CVE-2024-34069"
+          ],
+          "CWE": [
+            "CWE-94"
+          ],
+          "GHSA": [
+            "GHSA-2g68-c3qc-8985"
+          ]
+        },
+        "packageName": "werkzeug",
+        "proprietary": false,
+        "creationTime": "2024-05-06T07:14:00.654405Z",
+        "functions_new": [],
+        "alternativeIds": [],
+        "disclosureTime": "2024-05-06T01:48:44Z",
+        "exploitDetails": {
+          "sources": [],
+          "maturityLevels": [
+            {
+              "type": "secondary",
+              "level": "Not Defined",
+              "format": "CVSSv3"
+            },
+            {
+              "type": "primary",
+              "level": "Not Defined",
+              "format": "CVSSv4"
+            }
+          ]
+        },
+        "packageManager": "pip",
+        "publicationTime": "2024-05-06T07:25:10.516467Z",
+        "severityBasedOn": "CVSS",
+        "modificationTime": "2024-05-11T11:02:22.890220Z",
+        "socialTrendAlert": false,
+        "packagePopularityRank": 99,
+        "from": [
+          "app@0.0.0",
+          "flask@1.1.2",
+          "werkzeug@1.0.1"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "isRuntime": false,
+        "name": "werkzeug",
+        "version": "1.0.1",
+        "severityWithCritical": "high"
+      }
+    ],
+    "upgrade": {},
+    "patch": {},
+    "ignore": {},
+    "pin": {
+      "flask@1.1.2": {
+        "upgradeTo": "flask@2.2.5",
+        "vulns": [
+          "SNYK-PYTHON-FLASK-5490129"
+        ],
+        "isTransitive": false
+      },
+      "gunicorn@20.1.0": {
+        "upgradeTo": "gunicorn@23.0.0",
+        "vulns": [
+          "SNYK-PYTHON-GUNICORN-6615672",
+          "SNYK-PYTHON-GUNICORN-9510910"
+        ],
+        "isTransitive": false
+      },
+      "setuptools@58.1.0": {
+        "upgradeTo": "setuptools@70.0.0",
+        "vulns": [
+          "SNYK-PYTHON-SETUPTOOLS-7448482"
+        ],
+        "isTransitive": true
+      },
+      "werkzeug@1.0.1": {
+        "upgradeTo": "werkzeug@3.0.3",
+        "vulns": [
+          "SNYK-PYTHON-WERKZEUG-3319936",
+          "SNYK-PYTHON-WERKZEUG-6808933"
+        ],
+        "isTransitive": false
+      }
+    }
+  },
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 6,
+  "projectName": "app",
+  "displayTargetFile": "app/requirements.txt",
+  "hasUnknownVersions": false,
+  "path": "/home/runner/work/Secured-CI-CD-Pipeline/Secured-CI-CD-Pipeline"
+}
