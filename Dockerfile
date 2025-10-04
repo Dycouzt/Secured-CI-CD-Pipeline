@@ -1,52 +1,53 @@
-# Stage 1: The Builder
-# Using a more recent version of Python and a newer OS (Bullseye) to inherit fewer vulnerabilities.
-FROM python:3.11-slim-bullseye as builder
+# Dockerfile - Alpine Base (Minimal vulnerabilities)
 
-# Secure: Update OS packages and apply security patches BEFORE adding application code.
-# This reduces the attack surface from the very beginning.
-# The `-y` flag auto-confirms, and `rm -rf` cleans up the apt cache to keep the image small.
-RUN apt-get update && apt-get install -y --no-install-recommends gcc && apt-get upgrade -y \
-    && rm -rf /var/lib/apt/lists/*
+# --- Build Stage ---
+FROM python:3.11-alpine3.19 AS builder
+
+# Alpine uses apk instead of apt-get
+# Install build dependencies needed for Python packages
+RUN apk add --no-cache gcc musl-dev linux-headers
 
 WORKDIR /usr/src/app
+
 # Set environment variables
-# Prevents Python from writing pyc files to disc
 ENV PYTHONDONTWRITEBYTECODE=1
-# Prevents Python from buffering stdout and stderr
 ENV PYTHONUNBUFFERED=1
 
-# Install build dependencies
+# Upgrade pip
 RUN pip install --upgrade pip
 
-# Copy requirements and install dependencies
+# Copy requirements and build wheels
 COPY ./app/requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
-
 # --- Final Stage ---
-FROM python:3.11-slim-bullseye
+FROM python:3.11-alpine3.19
 
-# Create a non-root user for security
-RUN useradd --create-home appuser
+# Create non-root user
+RUN adduser -D appuser
+
 WORKDIR /home/appuser
 
-# Copy built wheels and application code from the builder stage
+# Copy wheels and application from builder
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 COPY ./app .
 
-# Install dependencies from local wheels to avoid hitting the network
-# This also ensures we use the exact packages from the build stage
+# Install dependencies from wheels
 RUN pip install --no-cache /wheels/*
 
-# Change ownership of the app directory to the non-root user
+# Set ownership
 RUN chown -R appuser:appuser /home/appuser
 
-# Switch to the non-root user
+# Switch to non-root user
 USER appuser
 
-# Expose the port the app runs on
+# Expose port
 EXPOSE 5000
 
-# Command to run the application using a production-grade server
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:5000/health || exit 1
+
+# Run with gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "app:app"]
