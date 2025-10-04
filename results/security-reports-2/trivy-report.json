@@ -1,0 +1,3658 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2025-10-04T14:04:07.545156161Z",
+  "ArtifactName": "dycouzt/ci-cd-secured-pipeline:latest",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "Size": 138334720,
+    "OS": {
+      "Family": "debian",
+      "Name": "10.13",
+      "EOSL": true
+    },
+    "ImageID": "sha256:dcc7829782b0c8cbc07df9a9d537027309715b194ff1df082ec03f0acda7c42a",
+    "DiffIDs": [
+      "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9",
+      "sha256:ae2d55769c5efcb6230d27c88eef033128fa1d238bdafe50812402f471152bb7",
+      "sha256:14cbeede8d6e46477338e9edd10f89c7a4f22ced60d4e6ae5ac1f0f886a19065",
+      "sha256:7fb1037e08b36a6ebd4b7f27021e7568a13dbc7cc72674a1b6361d0b53dc8f2f",
+      "sha256:067ea27560c1b4abe60cab2335c24e824b74705d534e8d9e561660c116ceb1d0",
+      "sha256:7c426780d76de35dad6a094c0b1c8ad0f123cf03e63ad701851cf3611e2781d4",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:3ec0395f3f9e45fdda462c84b762801204353f1484d05c64d70c351c22d4c8f8",
+      "sha256:8b4ffc521cb7cadb547ff636607eb2410e1e3e13dd371a268ceddc9272cd13b4",
+      "sha256:bfef1b19b32ea5c1a7599470d1bf20d87fc053d335344b8785ba2a02cb008656",
+      "sha256:2f78a525f80acda3e651df39d79a3ff61b2619538adef3748b316178d59a4be9",
+      "sha256:84e57e5e8e71bb473496eac77fedf5846e45056438c21c1f03088a6070762796"
+    ],
+    "RepoTags": [
+      "dycouzt/ci-cd-secured-pipeline:latest"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2025-10-04T14:03:52.352097072Z",
+      "history": [
+        {
+          "created": "2023-06-12T23:21:32Z",
+          "created_by": "/bin/sh -c #(nop) ADD file:2818e508d01da2188fb234b38fb19aa1ea9eeeae92d361ecdf49318d949f51a9 in / "
+        },
+        {
+          "created": "2023-06-12T23:21:32Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"bash\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV LANG=C.UTF-8",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "RUN /bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t\tnetbase \t\ttzdata \t; \trm -rf /var/lib/apt/lists/* # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV PYTHON_VERSION=3.9.17",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "RUN /bin/sh -c set -eux; \t\tsavedAptMark=\"$(apt-mark showmanual)\"; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tdpkg-dev \t\tgcc \t\tgnupg \t\tlibbluetooth-dev \t\tlibbz2-dev \t\tlibc6-dev \t\tlibdb-dev \t\tlibexpat1-dev \t\tlibffi-dev \t\tlibgdbm-dev \t\tliblzma-dev \t\tlibncursesw5-dev \t\tlibreadline-dev \t\tlibsqlite3-dev \t\tlibssl-dev \t\tmake \t\ttk-dev \t\tuuid-dev \t\twget \t\txz-utils \t\tzlib1g-dev \t; \t\twget -O python.tar.xz \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz\"; \twget -O python.tar.xz.asc \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc\"; \tGNUPGHOME=\"$(mktemp -d)\"; export GNUPGHOME; \tgpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$GPG_KEY\"; \tgpg --batch --verify python.tar.xz.asc python.tar.xz; \tgpgconf --kill all; \trm -rf \"$GNUPGHOME\" python.tar.xz.asc; \tmkdir -p /usr/src/python; \ttar --extract --directory /usr/src/python --strip-components=1 --file python.tar.xz; \trm python.tar.xz; \t\tcd /usr/src/python; \tgnuArch=\"$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)\"; \t./configure \t\t--build=\"$gnuArch\" \t\t--enable-loadable-sqlite-extensions \t\t--enable-optimizations \t\t--enable-option-checking=fatal \t\t--enable-shared \t\t--with-system-expat \t\t--without-ensurepip \t; \tnproc=\"$(nproc)\"; \tEXTRA_CFLAGS=\"$(dpkg-buildflags --get CFLAGS)\"; \tLDFLAGS=\"$(dpkg-buildflags --get LDFLAGS)\"; \tLDFLAGS=\"${LDFLAGS:--Wl},--strip-all\"; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:-}\" \t\t\"PROFILE_TASK=${PROFILE_TASK:-}\" \t; \trm python; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:--Wl},-rpath='\\$\\$ORIGIN/../lib'\" \t\t\"PROFILE_TASK=${PROFILE_TASK:-}\" \t\tpython \t; \tmake install; \t\tcd /; \trm -rf /usr/src/python; \t\tfind /usr/local -depth \t\t\\( \t\t\t\\( -type d -a \\( -name test -o -name tests -o -name idle_test \\) \\) \t\t\t-o \\( -type f -a \\( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \\) \\) \t\t\\) -exec rm -rf '{}' + \t; \t\tldconfig; \t\tapt-mark auto '.*' \u003e /dev/null; \tapt-mark manual $savedAptMark; \tfind /usr/local -type f -executable -not \\( -name '*tkinter*' \\) -exec ldd '{}' ';' \t\t| awk '/=\u003e/ { print $(NF-1) }' \t\t| sort -u \t\t| xargs -r dpkg-query --search \t\t| cut -d: -f1 \t\t| sort -u \t\t| xargs -r apt-mark manual \t; \tapt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \trm -rf /var/lib/apt/lists/*; \t\tpython3 --version # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "RUN /bin/sh -c set -eux; \tfor src in idle3 pydoc3 python3 python3-config; do \t\tdst=\"$(echo \"$src\" | tr -d 3)\"; \t\t[ -s \"/usr/local/bin/$src\" ]; \t\t[ ! -e \"/usr/local/bin/$dst\" ]; \t\tln -svT \"$src\" \"/usr/local/bin/$dst\"; \tdone # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV PYTHON_PIP_VERSION=23.0.1",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV PYTHON_SETUPTOOLS_VERSION=58.1.0",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/0d8570dc44796f4369b652222cf176b3db6ac70e/public/get-pip.py",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "ENV PYTHON_GET_PIP_SHA256=96461deced5c2a487ddc65207ec5a9cffeca0d34e7af7ea1afc470ff0d746207",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "RUN /bin/sh -c set -eux; \t\tsavedAptMark=\"$(apt-mark showmanual)\"; \tapt-get update; \tapt-get install -y --no-install-recommends wget; \t\twget -O get-pip.py \"$PYTHON_GET_PIP_URL\"; \techo \"$PYTHON_GET_PIP_SHA256 *get-pip.py\" | sha256sum -c -; \t\tapt-mark auto '.*' \u003e /dev/null; \t[ -z \"$savedAptMark\" ] || apt-mark manual $savedAptMark \u003e /dev/null; \tapt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \trm -rf /var/lib/apt/lists/*; \t\texport PYTHONDONTWRITEBYTECODE=1; \t\tpython get-pip.py \t\t--disable-pip-version-check \t\t--no-cache-dir \t\t--no-compile \t\t\"pip==$PYTHON_PIP_VERSION\" \t\t\"setuptools==$PYTHON_SETUPTOOLS_VERSION\" \t; \trm -f get-pip.py; \t\tpip --version # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-06T16:18:53Z",
+          "created_by": "CMD [\"python3\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-10-04T14:03:45Z",
+          "created_by": "RUN /bin/sh -c useradd --create-home appuser # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-10-04T14:03:45Z",
+          "created_by": "WORKDIR /home/appuser",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-10-04T14:03:49Z",
+          "created_by": "COPY /usr/src/app/wheels /wheels # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-10-04T14:03:49Z",
+          "created_by": "COPY /usr/src/app/requirements.txt . # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-10-04T14:03:49Z",
+          "created_by": "COPY ./app . # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-10-04T14:03:52Z",
+          "created_by": "RUN /bin/sh -c pip install --no-cache /wheels/* # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-10-04T14:03:52Z",
+          "created_by": "RUN /bin/sh -c chown -R appuser:appuser /home/appuser # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-10-04T14:03:52Z",
+          "created_by": "USER appuser",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-10-04T14:03:52Z",
+          "created_by": "EXPOSE \u0026{[{{47 0} {47 0}}] 0xc00069abc0}",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-10-04T14:03:52Z",
+          "created_by": "CMD [\"gunicorn\" \"--bind\" \"0.0.0.0:5000\" \"app:app\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9",
+          "sha256:ae2d55769c5efcb6230d27c88eef033128fa1d238bdafe50812402f471152bb7",
+          "sha256:14cbeede8d6e46477338e9edd10f89c7a4f22ced60d4e6ae5ac1f0f886a19065",
+          "sha256:7fb1037e08b36a6ebd4b7f27021e7568a13dbc7cc72674a1b6361d0b53dc8f2f",
+          "sha256:067ea27560c1b4abe60cab2335c24e824b74705d534e8d9e561660c116ceb1d0",
+          "sha256:7c426780d76de35dad6a094c0b1c8ad0f123cf03e63ad701851cf3611e2781d4",
+          "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "sha256:3ec0395f3f9e45fdda462c84b762801204353f1484d05c64d70c351c22d4c8f8",
+          "sha256:8b4ffc521cb7cadb547ff636607eb2410e1e3e13dd371a268ceddc9272cd13b4",
+          "sha256:bfef1b19b32ea5c1a7599470d1bf20d87fc053d335344b8785ba2a02cb008656",
+          "sha256:2f78a525f80acda3e651df39d79a3ff61b2619538adef3748b316178d59a4be9",
+          "sha256:84e57e5e8e71bb473496eac77fedf5846e45056438c21c1f03088a6070762796"
+        ]
+      },
+      "config": {
+        "Cmd": [
+          "gunicorn",
+          "--bind",
+          "0.0.0.0:5000",
+          "app:app"
+        ],
+        "Env": [
+          "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "LANG=C.UTF-8",
+          "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+          "PYTHON_VERSION=3.9.17",
+          "PYTHON_PIP_VERSION=23.0.1",
+          "PYTHON_SETUPTOOLS_VERSION=58.1.0",
+          "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/0d8570dc44796f4369b652222cf176b3db6ac70e/public/get-pip.py",
+          "PYTHON_GET_PIP_SHA256=96461deced5c2a487ddc65207ec5a9cffeca0d34e7af7ea1afc470ff0d746207"
+        ],
+        "User": "appuser",
+        "WorkingDir": "/home/appuser",
+        "ExposedPorts": {
+          "5000/tcp": {}
+        },
+        "ArgsEscaped": true
+      }
+    },
+    "Layers": [
+      {
+        "Size": 72541184,
+        "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+      },
+      {
+        "Size": 7400960,
+        "DiffID": "sha256:ae2d55769c5efcb6230d27c88eef033128fa1d238bdafe50812402f471152bb7"
+      },
+      {
+        "Size": 29783552,
+        "DiffID": "sha256:14cbeede8d6e46477338e9edd10f89c7a4f22ced60d4e6ae5ac1f0f886a19065"
+      },
+      {
+        "Size": 5120,
+        "DiffID": "sha256:7fb1037e08b36a6ebd4b7f27021e7568a13dbc7cc72674a1b6361d0b53dc8f2f"
+      },
+      {
+        "Size": 11690496,
+        "DiffID": "sha256:067ea27560c1b4abe60cab2335c24e824b74705d534e8d9e561660c116ceb1d0"
+      },
+      {
+        "Size": 346112,
+        "DiffID": "sha256:7c426780d76de35dad6a094c0b1c8ad0f123cf03e63ad701851cf3611e2781d4"
+      },
+      {
+        "Size": 1024,
+        "DiffID": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "Size": 1441280,
+        "DiffID": "sha256:3ec0395f3f9e45fdda462c84b762801204353f1484d05c64d70c351c22d4c8f8"
+      },
+      {
+        "Size": 3072,
+        "DiffID": "sha256:8b4ffc521cb7cadb547ff636607eb2410e1e3e13dd371a268ceddc9272cd13b4"
+      },
+      {
+        "Size": 8704,
+        "DiffID": "sha256:bfef1b19b32ea5c1a7599470d1bf20d87fc053d335344b8785ba2a02cb008656"
+      },
+      {
+        "Size": 15103488,
+        "DiffID": "sha256:2f78a525f80acda3e651df39d79a3ff61b2619538adef3748b316178d59a4be9"
+      },
+      {
+        "Size": 9728,
+        "DiffID": "sha256:84e57e5e8e71bb473496eac77fedf5846e45056438c21c1f03088a6070762796"
+      }
+    ]
+  },
+  "Results": [
+    {
+      "Target": "dycouzt/ci-cd-secured-pipeline:latest (debian 10.13)",
+      "Class": "os-pkgs",
+      "Type": "debian",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2022-1304",
+          "PkgID": "e2fsprogs@1.44.5-1+deb10u3",
+          "PkgName": "e2fsprogs",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/e2fsprogs@1.44.5-1%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "d5a8f485188eb07c"
+          },
+          "InstalledVersion": "1.44.5-1+deb10u3",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1304",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "e2fsprogs: out-of-bounds read/write via crafted filesystem",
+          "Description": "An out-of-bounds read/write vulnerability was found in e2fsprogs 1.46.5. This issue leads to a segmentation fault and possibly arbitrary code execution via a specially crafted filesystem.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:H",
+              "V3Score": 5.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2022:8361",
+            "https://access.redhat.com/security/cve/CVE-2022-1304",
+            "https://bugzilla.redhat.com/2069726",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2069726",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304",
+            "https://errata.almalinux.org/9/ALSA-2022-8361.html",
+            "https://errata.rockylinux.org/RLSA-2022:8361",
+            "https://linux.oracle.com/cve/CVE-2022-1304.html",
+            "https://linux.oracle.com/errata/ELSA-2024-12731.html",
+            "https://lists.debian.org/debian-lts-announce/2024/10/msg00001.html",
+            "https://marc.info/?l=linux-ext4\u0026m=165056234501732\u0026w=2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-1304",
+            "https://security.netapp.com/advisory/ntap-20241122-0010/",
+            "https://ubuntu.com/security/notices/USN-5464-1",
+            "https://www.cve.org/CVERecord?id=CVE-2022-1304"
+          ],
+          "PublishedDate": "2022-04-14T21:15:08.49Z",
+          "LastModifiedDate": "2025-04-23T19:15:53.01Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2018-12886",
+          "PkgID": "gcc-8-base@8.3.0-6",
+          "PkgName": "gcc-8-base",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64\u0026distro=debian-10.13",
+            "UID": "3c316548722f2d74"
+          },
+          "InstalledVersion": "8.3.0-6",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-12886",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "gcc: spilling of stack protection address in cfgexpand.c and function.c leads to stack-overflow protection bypass",
+          "Description": "stack_protect_prologue in cfgexpand.c and stack_protect_epilogue in function.c in GNU Compiler Collection (GCC) 4.1 through 8 (under certain circumstances) generate instruction sequences when targeting ARM targets that spill the address of the stack protector guard, which allows an attacker to bypass the protection of -fstack-protector, -fstack-protector-all, -fstack-protector-strong, and -fstack-protector-explicit against stack overflow by controlling what the stack canary is compared against.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-209"
+          ],
+          "VendorSeverity": {
+            "nvd": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 8.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:H",
+              "V3Score": 6.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2018-12886",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=89d7557202d25a393666ac4c0f7dbdab31e452a2",
+            "https://gcc.gnu.org/viewcvs/gcc/trunk/gcc/config/arm/arm-protos.h?revision=266379\u0026view=markup",
+            "https://nvd.nist.gov/vuln/detail/CVE-2018-12886",
+            "https://www.cve.org/CVERecord?id=CVE-2018-12886",
+            "https://www.gnu.org/software/gcc/gcc-8/changes.html"
+          ],
+          "PublishedDate": "2019-05-22T19:29:00.297Z",
+          "LastModifiedDate": "2024-11-21T03:46:02.563Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-15847",
+          "PkgID": "gcc-8-base@8.3.0-6",
+          "PkgName": "gcc-8-base",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64\u0026distro=debian-10.13",
+            "UID": "3c316548722f2d74"
+          },
+          "InstalledVersion": "8.3.0-6",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-15847",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "gcc: POWER9 \"DARN\" RNG intrinsic produces repeated output",
+          "Description": "The POWER9 backend in GNU Compiler Collection (GCC) before version 10 could optimize multiple calls of the __builtin_darn intrinsic into a single call, thus reducing the entropy of the random number generator. This occurred because a volatile operation was not specified. For example, within a single execution of a program, the output of every __builtin_darn() call may be the same.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-331"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00056.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00057.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2020-05/msg00058.html",
+            "https://access.redhat.com/security/cve/CVE-2019-15847",
+            "https://gcc.gnu.org/bugzilla/show_bug.cgi?id=91481",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=457dac402027dd7e14543fbd59a75858422cf6c6",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=e99bfdd2a8db732ea84cf0a6486707e5e821ad7e",
+            "https://linux.oracle.com/cve/CVE-2019-15847.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1864.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-15847",
+            "https://www.cve.org/CVERecord?id=CVE-2019-15847"
+          ],
+          "PublishedDate": "2019-09-02T23:15:10.837Z",
+          "LastModifiedDate": "2024-11-21T04:29:36.21Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-1751",
+          "PkgID": "libc-bin@2.28-10+deb10u2",
+          "PkgName": "libc-bin",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libc-bin@2.28-10%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "59a22f7eb2516d73"
+          },
+          "InstalledVersion": "2.28-10+deb10u2",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-1751",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: array overflow in backtrace functions for powerpc",
+          "Description": "An out-of-bounds write vulnerability was found in glibc before 2.31 when handling signal trampolines on PowerPC. Specifically, the backtrace function did not properly check the array bounds when storing the frame address, resulting in a denial of service or potential code execution. The highest threat from this vulnerability is to system availability.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:L/AC:M/Au:N/C:P/I:P/A:C",
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 5.9,
+              "V3Score": 7
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2020-1751",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1751",
+            "https://linux.oracle.com/cve/CVE-2020-1751.html",
+            "https://linux.oracle.com/errata/ELSA-2020-4444.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2020-1751",
+            "https://security.gentoo.org/glsa/202006-04",
+            "https://security.netapp.com/advisory/ntap-20200430-0002/",
+            "https://sourceware.org/bugzilla/show_bug.cgi?id=25423",
+            "https://ubuntu.com/security/notices/USN-4416-1",
+            "https://usn.ubuntu.com/4416-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2020-1751"
+          ],
+          "PublishedDate": "2020-04-17T19:15:14.437Z",
+          "LastModifiedDate": "2024-11-21T05:11:18.477Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-2961",
+          "VendorIDs": [
+            "DLA-3807-1"
+          ],
+          "PkgID": "libc-bin@2.28-10+deb10u2",
+          "PkgName": "libc-bin",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libc-bin@2.28-10%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "59a22f7eb2516d73"
+          },
+          "InstalledVersion": "2.28-10+deb10u2",
+          "FixedVersion": "2.28-10+deb10u3",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-2961",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: Out of bounds write in iconv may lead to remote code execution",
+          "Description": "The iconv() function in the GNU C Library versions 2.39 and older may overflow the output buffer passed to it by up to 4 bytes when converting strings to the ISO-2022-CN-EXT character set, which may be used to crash an application or overwrite a neighbouring variable.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/04/17/9",
+            "http://www.openwall.com/lists/oss-security/2024/04/18/4",
+            "http://www.openwall.com/lists/oss-security/2024/04/24/2",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/1",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/2",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/3",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/4",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/5",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/6",
+            "http://www.openwall.com/lists/oss-security/2024/07/22/5",
+            "https://access.redhat.com/errata/RHSA-2024:3339",
+            "https://access.redhat.com/security/cve/CVE-2024-2961",
+            "https://bugzilla.redhat.com/2273404",
+            "https://bugzilla.redhat.com/2277202",
+            "https://bugzilla.redhat.com/2277204",
+            "https://bugzilla.redhat.com/2277205",
+            "https://bugzilla.redhat.com/2277206",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2273404",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277202",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277204",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277205",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277206",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33599",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33600",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33601",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33602",
+            "https://errata.almalinux.org/9/ALSA-2024-3339.html",
+            "https://errata.rockylinux.org/RLSA-2024:3339",
+            "https://linux.oracle.com/cve/CVE-2024-2961.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3588.html",
+            "https://lists.debian.org/debian-lts-announce/2024/05/msg00001.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/BTJFBGHDYG5PEIFD5WSSSKSFZ2AZWC5N/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/P3I4KYS6EU6S7QZ47WFNTPVAHFIUQNEL/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YAMJQI3Y6BHWV3CUTYBXOZONCUJNOB2Z/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-2961",
+            "https://security.netapp.com/advisory/ntap-20240531-0002/",
+            "https://sourceware.org/git/?p=glibc.git;a=blob;f=advisories/GLIBC-SA-2024-0004",
+            "https://ubuntu.com/security/notices/USN-6737-1",
+            "https://ubuntu.com/security/notices/USN-6737-2",
+            "https://ubuntu.com/security/notices/USN-6762-1",
+            "https://www.ambionics.io/blog/iconv-cve-2024-2961-p1",
+            "https://www.ambionics.io/blog/iconv-cve-2024-2961-p2",
+            "https://www.ambionics.io/blog/iconv-cve-2024-2961-p3",
+            "https://www.cve.org/CVERecord?id=CVE-2024-2961",
+            "https://www.openwall.com/lists/oss-security/2024/04/17/9"
+          ],
+          "PublishedDate": "2024-04-17T18:15:15.833Z",
+          "LastModifiedDate": "2025-02-13T18:17:58.06Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-33599",
+          "VendorIDs": [
+            "DLA-3850-1"
+          ],
+          "PkgID": "libc-bin@2.28-10+deb10u2",
+          "PkgName": "libc-bin",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libc-bin@2.28-10%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "59a22f7eb2516d73"
+          },
+          "InstalledVersion": "2.28-10+deb10u2",
+          "FixedVersion": "2.28-10+deb10u4",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-33599",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: stack-based buffer overflow in netgroup cache",
+          "Description": "nscd: Stack-based buffer overflow in netgroup cache\n\nIf the Name Service Cache Daemon's (nscd) fixed size cache is exhausted\nby client requests then a subsequent client request for netgroup data\nmay result in a stack-based buffer overflow.  This flaw was introduced\nin glibc 2.15 when the cache was added to nscd.\n\nThis vulnerability is only present in the nscd binary.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-121"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 2,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:H",
+              "V3Score": 7.6
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/07/22/5",
+            "https://access.redhat.com/errata/RHSA-2024:3339",
+            "https://access.redhat.com/security/cve/CVE-2024-33599",
+            "https://bugzilla.redhat.com/2273404",
+            "https://bugzilla.redhat.com/2277202",
+            "https://bugzilla.redhat.com/2277204",
+            "https://bugzilla.redhat.com/2277205",
+            "https://bugzilla.redhat.com/2277206",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2273404",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277202",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277204",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277205",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277206",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33599",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33600",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33601",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33602",
+            "https://errata.almalinux.org/9/ALSA-2024-3339.html",
+            "https://errata.rockylinux.org/RLSA-2024:3339",
+            "https://inbox.sourceware.org/libc-alpha/cover.1713974801.git.fweimer@redhat.com/",
+            "https://linux.oracle.com/cve/CVE-2024-33599.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3588.html",
+            "https://lists.debian.org/debian-lts-announce/2024/06/msg00026.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-33599",
+            "https://security.netapp.com/advisory/ntap-20240524-0011/",
+            "https://sourceware.org/git/?p=glibc.git;a=blob;f=advisories/GLIBC-SA-2024-0005",
+            "https://ubuntu.com/security/notices/USN-6804-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-33599",
+            "https://www.openwall.com/lists/oss-security/2024/04/24/2"
+          ],
+          "PublishedDate": "2024-05-06T20:15:11.437Z",
+          "LastModifiedDate": "2025-06-18T14:56:01.037Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-1751",
+          "PkgID": "libc6@2.28-10+deb10u2",
+          "PkgName": "libc6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libc6@2.28-10%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "5a3be8cddcee1bcf"
+          },
+          "InstalledVersion": "2.28-10+deb10u2",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-1751",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: array overflow in backtrace functions for powerpc",
+          "Description": "An out-of-bounds write vulnerability was found in glibc before 2.31 when handling signal trampolines on PowerPC. Specifically, the backtrace function did not properly check the array bounds when storing the frame address, resulting in a denial of service or potential code execution. The highest threat from this vulnerability is to system availability.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:L/AC:M/Au:N/C:P/I:P/A:C",
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 5.9,
+              "V3Score": 7
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2020-1751",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1751",
+            "https://linux.oracle.com/cve/CVE-2020-1751.html",
+            "https://linux.oracle.com/errata/ELSA-2020-4444.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2020-1751",
+            "https://security.gentoo.org/glsa/202006-04",
+            "https://security.netapp.com/advisory/ntap-20200430-0002/",
+            "https://sourceware.org/bugzilla/show_bug.cgi?id=25423",
+            "https://ubuntu.com/security/notices/USN-4416-1",
+            "https://usn.ubuntu.com/4416-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2020-1751"
+          ],
+          "PublishedDate": "2020-04-17T19:15:14.437Z",
+          "LastModifiedDate": "2024-11-21T05:11:18.477Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-2961",
+          "VendorIDs": [
+            "DLA-3807-1"
+          ],
+          "PkgID": "libc6@2.28-10+deb10u2",
+          "PkgName": "libc6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libc6@2.28-10%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "5a3be8cddcee1bcf"
+          },
+          "InstalledVersion": "2.28-10+deb10u2",
+          "FixedVersion": "2.28-10+deb10u3",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-2961",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: Out of bounds write in iconv may lead to remote code execution",
+          "Description": "The iconv() function in the GNU C Library versions 2.39 and older may overflow the output buffer passed to it by up to 4 bytes when converting strings to the ISO-2022-CN-EXT character set, which may be used to crash an application or overwrite a neighbouring variable.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/04/17/9",
+            "http://www.openwall.com/lists/oss-security/2024/04/18/4",
+            "http://www.openwall.com/lists/oss-security/2024/04/24/2",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/1",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/2",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/3",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/4",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/5",
+            "http://www.openwall.com/lists/oss-security/2024/05/27/6",
+            "http://www.openwall.com/lists/oss-security/2024/07/22/5",
+            "https://access.redhat.com/errata/RHSA-2024:3339",
+            "https://access.redhat.com/security/cve/CVE-2024-2961",
+            "https://bugzilla.redhat.com/2273404",
+            "https://bugzilla.redhat.com/2277202",
+            "https://bugzilla.redhat.com/2277204",
+            "https://bugzilla.redhat.com/2277205",
+            "https://bugzilla.redhat.com/2277206",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2273404",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277202",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277204",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277205",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277206",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33599",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33600",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33601",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33602",
+            "https://errata.almalinux.org/9/ALSA-2024-3339.html",
+            "https://errata.rockylinux.org/RLSA-2024:3339",
+            "https://linux.oracle.com/cve/CVE-2024-2961.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3588.html",
+            "https://lists.debian.org/debian-lts-announce/2024/05/msg00001.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/BTJFBGHDYG5PEIFD5WSSSKSFZ2AZWC5N/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/P3I4KYS6EU6S7QZ47WFNTPVAHFIUQNEL/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YAMJQI3Y6BHWV3CUTYBXOZONCUJNOB2Z/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-2961",
+            "https://security.netapp.com/advisory/ntap-20240531-0002/",
+            "https://sourceware.org/git/?p=glibc.git;a=blob;f=advisories/GLIBC-SA-2024-0004",
+            "https://ubuntu.com/security/notices/USN-6737-1",
+            "https://ubuntu.com/security/notices/USN-6737-2",
+            "https://ubuntu.com/security/notices/USN-6762-1",
+            "https://www.ambionics.io/blog/iconv-cve-2024-2961-p1",
+            "https://www.ambionics.io/blog/iconv-cve-2024-2961-p2",
+            "https://www.ambionics.io/blog/iconv-cve-2024-2961-p3",
+            "https://www.cve.org/CVERecord?id=CVE-2024-2961",
+            "https://www.openwall.com/lists/oss-security/2024/04/17/9"
+          ],
+          "PublishedDate": "2024-04-17T18:15:15.833Z",
+          "LastModifiedDate": "2025-02-13T18:17:58.06Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-33599",
+          "VendorIDs": [
+            "DLA-3850-1"
+          ],
+          "PkgID": "libc6@2.28-10+deb10u2",
+          "PkgName": "libc6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libc6@2.28-10%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "5a3be8cddcee1bcf"
+          },
+          "InstalledVersion": "2.28-10+deb10u2",
+          "FixedVersion": "2.28-10+deb10u4",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-33599",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "glibc: stack-based buffer overflow in netgroup cache",
+          "Description": "nscd: Stack-based buffer overflow in netgroup cache\n\nIf the Name Service Cache Daemon's (nscd) fixed size cache is exhausted\nby client requests then a subsequent client request for netgroup data\nmay result in a stack-based buffer overflow.  This flaw was introduced\nin glibc 2.15 when the cache was added to nscd.\n\nThis vulnerability is only present in the nscd binary.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-121"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 2,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:H",
+              "V3Score": 7.6
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/07/22/5",
+            "https://access.redhat.com/errata/RHSA-2024:3339",
+            "https://access.redhat.com/security/cve/CVE-2024-33599",
+            "https://bugzilla.redhat.com/2273404",
+            "https://bugzilla.redhat.com/2277202",
+            "https://bugzilla.redhat.com/2277204",
+            "https://bugzilla.redhat.com/2277205",
+            "https://bugzilla.redhat.com/2277206",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2273404",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277202",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277204",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277205",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2277206",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33599",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33600",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33601",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33602",
+            "https://errata.almalinux.org/9/ALSA-2024-3339.html",
+            "https://errata.rockylinux.org/RLSA-2024:3339",
+            "https://inbox.sourceware.org/libc-alpha/cover.1713974801.git.fweimer@redhat.com/",
+            "https://linux.oracle.com/cve/CVE-2024-33599.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3588.html",
+            "https://lists.debian.org/debian-lts-announce/2024/06/msg00026.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-33599",
+            "https://security.netapp.com/advisory/ntap-20240524-0011/",
+            "https://sourceware.org/git/?p=glibc.git;a=blob;f=advisories/GLIBC-SA-2024-0005",
+            "https://ubuntu.com/security/notices/USN-6804-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-33599",
+            "https://www.openwall.com/lists/oss-security/2024/04/24/2"
+          ],
+          "PublishedDate": "2024-05-06T20:15:11.437Z",
+          "LastModifiedDate": "2025-06-18T14:56:01.037Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-1304",
+          "PkgID": "libcom-err2@1.44.5-1+deb10u3",
+          "PkgName": "libcom-err2",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libcom-err2@1.44.5-1%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "4e290d2a0aa14919"
+          },
+          "InstalledVersion": "1.44.5-1+deb10u3",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1304",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "e2fsprogs: out-of-bounds read/write via crafted filesystem",
+          "Description": "An out-of-bounds read/write vulnerability was found in e2fsprogs 1.46.5. This issue leads to a segmentation fault and possibly arbitrary code execution via a specially crafted filesystem.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:H",
+              "V3Score": 5.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2022:8361",
+            "https://access.redhat.com/security/cve/CVE-2022-1304",
+            "https://bugzilla.redhat.com/2069726",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2069726",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304",
+            "https://errata.almalinux.org/9/ALSA-2022-8361.html",
+            "https://errata.rockylinux.org/RLSA-2022:8361",
+            "https://linux.oracle.com/cve/CVE-2022-1304.html",
+            "https://linux.oracle.com/errata/ELSA-2024-12731.html",
+            "https://lists.debian.org/debian-lts-announce/2024/10/msg00001.html",
+            "https://marc.info/?l=linux-ext4\u0026m=165056234501732\u0026w=2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-1304",
+            "https://security.netapp.com/advisory/ntap-20241122-0010/",
+            "https://ubuntu.com/security/notices/USN-5464-1",
+            "https://www.cve.org/CVERecord?id=CVE-2022-1304"
+          ],
+          "PublishedDate": "2022-04-14T21:15:08.49Z",
+          "LastModifiedDate": "2025-04-23T19:15:53.01Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-8457",
+          "PkgID": "libdb5.3@5.3.28+dfsg1-0.5",
+          "PkgName": "libdb5.3",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libdb5.3@5.3.28%2Bdfsg1-0.5?arch=amd64\u0026distro=debian-10.13",
+            "UID": "e3f919ad67723b46"
+          },
+          "InstalledVersion": "5.3.28+dfsg1-0.5",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-8457",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "sqlite: heap out-of-bound read in function rtreenode()",
+          "Description": "SQLite3 from 3.6.0 to and including 3.27.2 is vulnerable to heap out-of-bound read in the rtreenode() function when handling invalid rtree tables.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-125"
+          ],
+          "VendorSeverity": {
+            "azure": 4,
+            "nvd": 4,
+            "oracle-oval": 2,
+            "photon": 4,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 7.5,
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00074.html",
+            "https://access.redhat.com/security/cve/CVE-2019-8457",
+            "https://kc.mcafee.com/corporate/index?page=content\u0026id=SB10365",
+            "https://linux.oracle.com/cve/CVE-2019-8457.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1810.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/OPKYSWCOM3CL66RI76TYVIG6TJ263RXH/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SJPFGA45DI4F5MCF2OAACGH3HQOF4G3M/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-8457",
+            "https://security.netapp.com/advisory/ntap-20190606-0002/",
+            "https://ubuntu.com/security/notices/USN-4004-1",
+            "https://ubuntu.com/security/notices/USN-4004-2",
+            "https://ubuntu.com/security/notices/USN-4019-1",
+            "https://ubuntu.com/security/notices/USN-4019-2",
+            "https://usn.ubuntu.com/4004-1/",
+            "https://usn.ubuntu.com/4004-2/",
+            "https://usn.ubuntu.com/4019-1/",
+            "https://usn.ubuntu.com/4019-2/",
+            "https://www.cve.org/CVERecord?id=CVE-2019-8457",
+            "https://www.oracle.com/security-alerts/cpuapr2020.html",
+            "https://www.oracle.com/security-alerts/cpujan2020.html",
+            "https://www.oracle.com/security-alerts/cpujul2020.html",
+            "https://www.oracle.com/technetwork/security-advisory/cpuoct2019-5072832.html",
+            "https://www.sqlite.org/releaselog/3_28_0.html",
+            "https://www.sqlite.org/src/info/90acdbfce9c08858"
+          ],
+          "PublishedDate": "2019-05-30T16:29:01.84Z",
+          "LastModifiedDate": "2024-11-21T04:49:56.443Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-52425",
+          "VendorIDs": [
+            "DLA-3783-1"
+          ],
+          "PkgID": "libexpat1@2.2.6-2+deb10u6",
+          "PkgName": "libexpat1",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libexpat1@2.2.6-2%2Bdeb10u6?arch=amd64\u0026distro=debian-10.13",
+            "UID": "b5687b93fbdf5617"
+          },
+          "InstalledVersion": "2.2.6-2+deb10u6",
+          "FixedVersion": "2.2.6-2+deb10u7",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:14cbeede8d6e46477338e9edd10f89c7a4f22ced60d4e6ae5ac1f0f886a19065"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-52425",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "expat: parsing large tokens can trigger a denial of service",
+          "Description": "libexpat through 2.5.0 allows a denial of service (resource consumption) because many full reparsings are required in the case of a large token for which multiple buffer fills are needed.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/03/20/5",
+            "https://access.redhat.com/errata/RHSA-2024:1530",
+            "https://access.redhat.com/security/cve/CVE-2023-52425",
+            "https://bugzilla.redhat.com/2262877",
+            "https://bugzilla.redhat.com/2268766",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2262877",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-52425",
+            "https://errata.almalinux.org/9/ALSA-2024-1530.html",
+            "https://errata.rockylinux.org/RLSA-2024:1615",
+            "https://github.com/libexpat/libexpat/pull/789",
+            "https://linux.oracle.com/cve/CVE-2023-52425.html",
+            "https://linux.oracle.com/errata/ELSA-2024-4259.html",
+            "https://lists.debian.org/debian-lts-announce/2024/04/msg00006.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/PNRIHC7DVVRAIWFRGV23Y6UZXFBXSQDB/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/WNUBSGZFEZOBHJFTAD42SAN4ATW2VEMV/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-52425",
+            "https://security.netapp.com/advisory/ntap-20240614-0003/",
+            "https://ubuntu.com/security/notices/USN-6694-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-52425"
+          ],
+          "PublishedDate": "2024-02-04T20:15:46.063Z",
+          "LastModifiedDate": "2024-11-21T08:39:43.393Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-1304",
+          "PkgID": "libext2fs2@1.44.5-1+deb10u3",
+          "PkgName": "libext2fs2",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libext2fs2@1.44.5-1%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "bc675dc2444ceeae"
+          },
+          "InstalledVersion": "1.44.5-1+deb10u3",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1304",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "e2fsprogs: out-of-bounds read/write via crafted filesystem",
+          "Description": "An out-of-bounds read/write vulnerability was found in e2fsprogs 1.46.5. This issue leads to a segmentation fault and possibly arbitrary code execution via a specially crafted filesystem.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:H",
+              "V3Score": 5.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2022:8361",
+            "https://access.redhat.com/security/cve/CVE-2022-1304",
+            "https://bugzilla.redhat.com/2069726",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2069726",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304",
+            "https://errata.almalinux.org/9/ALSA-2022-8361.html",
+            "https://errata.rockylinux.org/RLSA-2022:8361",
+            "https://linux.oracle.com/cve/CVE-2022-1304.html",
+            "https://linux.oracle.com/errata/ELSA-2024-12731.html",
+            "https://lists.debian.org/debian-lts-announce/2024/10/msg00001.html",
+            "https://marc.info/?l=linux-ext4\u0026m=165056234501732\u0026w=2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-1304",
+            "https://security.netapp.com/advisory/ntap-20241122-0010/",
+            "https://ubuntu.com/security/notices/USN-5464-1",
+            "https://www.cve.org/CVERecord?id=CVE-2022-1304"
+          ],
+          "PublishedDate": "2022-04-14T21:15:08.49Z",
+          "LastModifiedDate": "2025-04-23T19:15:53.01Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2018-12886",
+          "PkgID": "libgcc1@1:8.3.0-6",
+          "PkgName": "libgcc1",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libgcc1@8.3.0-6?arch=amd64\u0026distro=debian-10.13\u0026epoch=1",
+            "UID": "f61ab691c2c81827"
+          },
+          "InstalledVersion": "1:8.3.0-6",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-12886",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "gcc: spilling of stack protection address in cfgexpand.c and function.c leads to stack-overflow protection bypass",
+          "Description": "stack_protect_prologue in cfgexpand.c and stack_protect_epilogue in function.c in GNU Compiler Collection (GCC) 4.1 through 8 (under certain circumstances) generate instruction sequences when targeting ARM targets that spill the address of the stack protector guard, which allows an attacker to bypass the protection of -fstack-protector, -fstack-protector-all, -fstack-protector-strong, and -fstack-protector-explicit against stack overflow by controlling what the stack canary is compared against.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-209"
+          ],
+          "VendorSeverity": {
+            "nvd": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 8.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:H",
+              "V3Score": 6.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2018-12886",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=89d7557202d25a393666ac4c0f7dbdab31e452a2",
+            "https://gcc.gnu.org/viewcvs/gcc/trunk/gcc/config/arm/arm-protos.h?revision=266379\u0026view=markup",
+            "https://nvd.nist.gov/vuln/detail/CVE-2018-12886",
+            "https://www.cve.org/CVERecord?id=CVE-2018-12886",
+            "https://www.gnu.org/software/gcc/gcc-8/changes.html"
+          ],
+          "PublishedDate": "2019-05-22T19:29:00.297Z",
+          "LastModifiedDate": "2024-11-21T03:46:02.563Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-15847",
+          "PkgID": "libgcc1@1:8.3.0-6",
+          "PkgName": "libgcc1",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libgcc1@8.3.0-6?arch=amd64\u0026distro=debian-10.13\u0026epoch=1",
+            "UID": "f61ab691c2c81827"
+          },
+          "InstalledVersion": "1:8.3.0-6",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-15847",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "gcc: POWER9 \"DARN\" RNG intrinsic produces repeated output",
+          "Description": "The POWER9 backend in GNU Compiler Collection (GCC) before version 10 could optimize multiple calls of the __builtin_darn intrinsic into a single call, thus reducing the entropy of the random number generator. This occurred because a volatile operation was not specified. For example, within a single execution of a program, the output of every __builtin_darn() call may be the same.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-331"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00056.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00057.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2020-05/msg00058.html",
+            "https://access.redhat.com/security/cve/CVE-2019-15847",
+            "https://gcc.gnu.org/bugzilla/show_bug.cgi?id=91481",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=457dac402027dd7e14543fbd59a75858422cf6c6",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=e99bfdd2a8db732ea84cf0a6486707e5e821ad7e",
+            "https://linux.oracle.com/cve/CVE-2019-15847.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1864.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-15847",
+            "https://www.cve.org/CVERecord?id=CVE-2019-15847"
+          ],
+          "PublishedDate": "2019-09-02T23:15:10.837Z",
+          "LastModifiedDate": "2024-11-21T04:29:36.21Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-33560",
+          "PkgID": "libgcrypt20@1.8.4-5+deb10u1",
+          "PkgName": "libgcrypt20",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libgcrypt20@1.8.4-5%2Bdeb10u1?arch=amd64\u0026distro=debian-10.13",
+            "UID": "a4770d149e7c7cec"
+          },
+          "InstalledVersion": "1.8.4-5+deb10u1",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-33560",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "libgcrypt: mishandles ElGamal encryption because it lacks exponent blinding to address a side-channel attack against mpi_powm",
+          "Description": "Libgcrypt before 1.8.8 and 1.9.x before 1.9.3 mishandles ElGamal encryption because it lacks exponent blinding to address a side-channel attack against mpi_powm, and the window size is not chosen appropriately. This, for example, affects use of ElGamal in OpenPGP.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-203"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/hydra/rest/securitydata/cve/CVE-2021-33560.json",
+            "https://access.redhat.com/security/cve/CVE-2021-33560",
+            "https://dev.gnupg.org/T5305",
+            "https://dev.gnupg.org/T5328",
+            "https://dev.gnupg.org/T5466",
+            "https://dev.gnupg.org/rCe8b7f10be275bcedb5fc05ed4837a89bfd605c61",
+            "https://eprint.iacr.org/2021/923",
+            "https://errata.almalinux.org/8/ALSA-2021-4409.html",
+            "https://linux.oracle.com/cve/CVE-2021-33560.html",
+            "https://linux.oracle.com/errata/ELSA-2022-9263.html",
+            "https://lists.debian.org/debian-lts-announce/2021/06/msg00021.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/BKKTOIGFW2SGN3DO2UHHVZ7MJSYN4AAB/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/R7OAPCUGPF3VLA7QAJUQSL255D4ITVTL/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-33560",
+            "https://security.gentoo.org/glsa/202210-13",
+            "https://ubuntu.com/security/notices/USN-5080-1",
+            "https://ubuntu.com/security/notices/USN-5080-2",
+            "https://www.cve.org/CVERecord?id=CVE-2021-33560",
+            "https://www.oracle.com/security-alerts/cpuapr2022.html",
+            "https://www.oracle.com/security-alerts/cpujan2022.html",
+            "https://www.oracle.com/security-alerts/cpujul2022.html",
+            "https://www.oracle.com/security-alerts/cpuoct2021.html"
+          ],
+          "PublishedDate": "2021-06-08T11:15:07.767Z",
+          "LastModifiedDate": "2024-11-21T06:09:05.76Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-0553",
+          "VendorIDs": [
+            "DLA-3740-1"
+          ],
+          "PkgID": "libgnutls30@3.6.7-4+deb10u10",
+          "PkgName": "libgnutls30",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libgnutls30@3.6.7-4%2Bdeb10u10?arch=amd64\u0026distro=debian-10.13",
+            "UID": "60abc971b6a0792d"
+          },
+          "InstalledVersion": "3.6.7-4+deb10u10",
+          "FixedVersion": "3.6.7-4+deb10u12",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-0553",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "gnutls: incomplete fix for CVE-2023-5981",
+          "Description": "A vulnerability was found in GnuTLS. The response times to malformed ciphertexts in RSA-PSK ClientKeyExchange differ from the response times of ciphertexts with correct PKCS#1 v1.5 padding. This issue may allow a remote attacker to perform a timing side-channel attack in the RSA-PSK key exchange, potentially leading to the leakage of sensitive data. CVE-2024-0553 is designated as an incomplete resolution for CVE-2023-5981.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-203"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/01/19/3",
+            "https://access.redhat.com/errata/RHSA-2024:0533",
+            "https://access.redhat.com/errata/RHSA-2024:0627",
+            "https://access.redhat.com/errata/RHSA-2024:0796",
+            "https://access.redhat.com/errata/RHSA-2024:1082",
+            "https://access.redhat.com/errata/RHSA-2024:1108",
+            "https://access.redhat.com/errata/RHSA-2024:1383",
+            "https://access.redhat.com/errata/RHSA-2024:2094",
+            "https://access.redhat.com/security/cve/CVE-2024-0553",
+            "https://bugzilla.redhat.com/2248445",
+            "https://bugzilla.redhat.com/2258412",
+            "https://bugzilla.redhat.com/2258544",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2258412",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-0553",
+            "https://errata.almalinux.org/9/ALSA-2024-0533.html",
+            "https://errata.rockylinux.org/RLSA-2024:0627",
+            "https://gitlab.com/gnutls/gnutls/-/issues/1522",
+            "https://gnutls.org/security-new.html#GNUTLS-SA-2024-01-14",
+            "https://linux.oracle.com/cve/CVE-2024-0553.html",
+            "https://linux.oracle.com/errata/ELSA-2024-12336.html",
+            "https://lists.debian.org/debian-lts-announce/2024/02/msg00010.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/7ZEIOLORQ7N6WRPFXZSYDL2MC4LP7VFV/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GNXKVR5YNUEBNHAHM5GSYKBZX4W2HMN2/",
+            "https://lists.gnupg.org/pipermail/gnutls-help/2024-January/004841.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-0553",
+            "https://security.netapp.com/advisory/ntap-20240202-0011/",
+            "https://ubuntu.com/security/notices/USN-6593-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-0553"
+          ],
+          "PublishedDate": "2024-01-16T12:15:45.557Z",
+          "LastModifiedDate": "2024-11-21T08:46:51.507Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-12290",
+          "PkgID": "libidn2-0@2.0.5-1+deb10u1",
+          "PkgName": "libidn2-0",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libidn2-0@2.0.5-1%2Bdeb10u1?arch=amd64\u0026distro=debian-10.13",
+            "UID": "8bfa68a99373d90d"
+          },
+          "InstalledVersion": "2.0.5-1+deb10u1",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-12290",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "GNU libidn2 before 2.2.0 fails to perform the roundtrip checks specifi ...",
+          "Description": "GNU libidn2 before 2.2.0 fails to perform the roundtrip checks specified in RFC3490 Section 4.2 when converting A-labels to U-labels. This makes it possible in some circumstances for one domain to impersonate another. By creating a malicious domain that matches a target domain except for the inclusion of certain punycoded Unicode characters (that would be discarded when converted first to a Unicode label and then back to an ASCII label), arbitrary domains can be impersonated.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-20"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "nvd": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:N/I:P/A:N",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V2Score": 5,
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://lists.opensuse.org/opensuse-security-announce/2019-12/msg00008.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2019-12/msg00009.html",
+            "https://gitlab.com/libidn/libidn2/commit/241e8f486134793cb0f4a5b0e5817a97883401f5",
+            "https://gitlab.com/libidn/libidn2/commit/614117ef6e4c60e1950d742e3edf0a0ef8d389de",
+            "https://gitlab.com/libidn/libidn2/merge_requests/71",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/3UFT76Y7OSGPZV3EBEHD6ISVUM3DLARM/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/KXDKYWFV6N2HHVSE67FFDM7G3FEL2ZNE/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ONG3GJRRJO35COPGVJXXSZLU4J5Y42AT/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/RSI4TI2JTQWQ3YEUX5X36GTVGKO4QKZ5/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/U6ZXL2RDNQRAHCMKWPOMJFKYJ344X4HL/",
+            "https://security.gentoo.org/glsa/202003-63",
+            "https://ubuntu.com/security/notices/USN-4168-1",
+            "https://usn.ubuntu.com/4168-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2019-12290"
+          ],
+          "PublishedDate": "2019-10-22T16:15:10.877Z",
+          "LastModifiedDate": "2024-11-21T04:22:33.913Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-39537",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "libncursesw6@6.1+20181013-2+deb10u3",
+          "PkgName": "libncursesw6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libncursesw6@6.1%2B20181013-2%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "b938666b7e5bf7ca"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-39537",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: heap-based buffer overflow in _nc_captoinfo() in captoinfo.c",
+          "Description": "An issue was discovered in ncurses through v6.2-1. _nc_captoinfo in captoinfo.c has a heap-based buffer overflow.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "photon": 3,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 8.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 5.5
+            }
+          },
+          "References": [
+            "http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/devel/ncurses/patches/patch-ncurses_tinfo_captoinfo.c?rev=1.1\u0026content-type=text/x-cvsweb-markup",
+            "http://seclists.org/fulldisclosure/2022/Oct/28",
+            "http://seclists.org/fulldisclosure/2022/Oct/41",
+            "http://seclists.org/fulldisclosure/2022/Oct/43",
+            "http://seclists.org/fulldisclosure/2022/Oct/45",
+            "https://access.redhat.com/security/cve/CVE-2021-39537",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2020-08/msg00006.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2021-10/msg00023.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-39537",
+            "https://security.netapp.com/advisory/ntap-20230427-0012/",
+            "https://support.apple.com/kb/HT213443",
+            "https://support.apple.com/kb/HT213444",
+            "https://support.apple.com/kb/HT213488",
+            "https://ubuntu.com/security/notices/USN-5477-1",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2021-39537"
+          ],
+          "PublishedDate": "2021-09-20T16:15:12.477Z",
+          "LastModifiedDate": "2024-11-21T06:19:38.517Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-29491",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "libncursesw6@6.1+20181013-2+deb10u3",
+          "PkgName": "libncursesw6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libncursesw6@6.1%2B20181013-2%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "b938666b7e5bf7ca"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-29491",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: Local users can trigger security-relevant memory corruption via malformed data",
+          "Description": "ncurses before 6.4 20230408, when used by a setuid application, allows local users to trigger security-relevant memory corruption via malformed data in a terminfo database file that is found in $HOME/.terminfo or reached via the TERMINFO or TERM environment variable.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git%3Ba=commit%3Bh=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git;a=commit;h=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/10",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/11",
+            "https://access.redhat.com/errata/RHSA-2023:6698",
+            "https://access.redhat.com/security/cve/CVE-2023-29491",
+            "https://bugzilla.redhat.com/2191704",
+            "https://errata.almalinux.org/9/ALSA-2023-6698.html",
+            "https://invisible-island.net/ncurses/NEWS.html#index-t20230408",
+            "https://linux.oracle.com/cve/CVE-2023-29491.html",
+            "https://linux.oracle.com/errata/ELSA-2023-6698.html",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/LU4MYMKFEZQ5VSCVLRIZGDQOUW3T44GT/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-29491",
+            "https://security.netapp.com/advisory/ntap-20230517-0009/",
+            "https://support.apple.com/kb/HT213843",
+            "https://support.apple.com/kb/HT213844",
+            "https://support.apple.com/kb/HT213845",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-29491",
+            "https://www.openwall.com/lists/oss-security/2023/04/12/5",
+            "https://www.openwall.com/lists/oss-security/2023/04/13/4"
+          ],
+          "PublishedDate": "2023-04-14T01:15:08.57Z",
+          "LastModifiedDate": "2024-11-21T07:57:09.933Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-19603",
+          "PkgID": "libsqlite3-0@3.27.2-3+deb10u2",
+          "PkgName": "libsqlite3-0",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libsqlite3-0@3.27.2-3%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "7d9a841f9a1833b3"
+          },
+          "InstalledVersion": "3.27.2-3+deb10u2",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:14cbeede8d6e46477338e9edd10f89c7a4f22ced60d4e6ae5ac1f0f886a19065"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-19603",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "sqlite: mishandling of certain SELECT statements with non-existent VIEW can lead to DoS",
+          "Description": "SQLite 3.30.1 mishandles certain SELECT statements with a nonexistent VIEW, leading to an application crash.",
+          "Severity": "HIGH",
+          "VendorSeverity": {
+            "alma": 2,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/hydra/rest/securitydata/cve/CVE-2019-13750.json",
+            "https://access.redhat.com/hydra/rest/securitydata/cve/CVE-2019-13751.json",
+            "https://access.redhat.com/hydra/rest/securitydata/cve/CVE-2019-19603.json",
+            "https://access.redhat.com/hydra/rest/securitydata/cve/CVE-2019-5827.json",
+            "https://access.redhat.com/hydra/rest/securitydata/cve/CVE-2020-13435.json",
+            "https://access.redhat.com/security/cve/CVE-2019-19603",
+            "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf",
+            "https://errata.almalinux.org/8/ALSA-2021-4396.html",
+            "https://github.com/sqlite/sqlite/commit/527cbd4a104cb93bf3994b3dd3619a6299a78b13",
+            "https://linux.oracle.com/cve/CVE-2019-19603.html",
+            "https://linux.oracle.com/errata/ELSA-2021-4396.html",
+            "https://lists.apache.org/thread.html/rc713534b10f9daeee2e0990239fa407e2118e4aa9e88a7041177497c%40%3Cissues.guacamole.apache.org%3E",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-19603",
+            "https://security.netapp.com/advisory/ntap-20191223-0001/",
+            "https://ubuntu.com/security/notices/USN-4394-1",
+            "https://usn.ubuntu.com/4394-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2019-19603",
+            "https://www.oracle.com/security-alerts/cpuapr2020.html",
+            "https://www.sqlite.org/"
+          ],
+          "PublishedDate": "2019-12-09T19:15:14.71Z",
+          "LastModifiedDate": "2024-11-21T04:35:01.97Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-7104",
+          "PkgID": "libsqlite3-0@3.27.2-3+deb10u2",
+          "PkgName": "libsqlite3-0",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libsqlite3-0@3.27.2-3%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13",
+            "UID": "7d9a841f9a1833b3"
+          },
+          "InstalledVersion": "3.27.2-3+deb10u2",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:14cbeede8d6e46477338e9edd10f89c7a4f22ced60d4e6ae5ac1f0f886a19065"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-7104",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "sqlite: heap-buffer-overflow at sessionfuzz",
+          "Description": "A vulnerability was found in SQLite SQLite3 up to 3.43.0 and classified as critical. This issue affects the function sessionReadRecord of the file ext/session/sqlite3session.c of the component make alltest Handler. The manipulation leads to heap-based buffer overflow. It is recommended to apply a patch to fix this issue. The associated identifier of this vulnerability is VDB-248999.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-122",
+            "CWE-119"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "bitnami": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "bitnami": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 7.3
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 7.3
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 7.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2024:0465",
+            "https://access.redhat.com/security/cve/CVE-2023-7104",
+            "https://bugzilla.redhat.com/2256194",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2256194",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-7104",
+            "https://errata.almalinux.org/9/ALSA-2024-0465.html",
+            "https://errata.rockylinux.org/RLSA-2024:0253",
+            "https://linux.oracle.com/cve/CVE-2023-7104.html",
+            "https://linux.oracle.com/errata/ELSA-2024-0465.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/AYONA2XSNFMXLAW4IHLFI5UVV3QRNG5K/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/D6C2HN4T2S6GYNTAUXLH45LQZHK7QPHP/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-7104",
+            "https://security.netapp.com/advisory/ntap-20240112-0008/",
+            "https://sqlite.org/forum/forumpost/5bcbf4571c",
+            "https://sqlite.org/src/info/0e4e7a05c4204b47",
+            "https://ubuntu.com/security/notices/USN-6566-1",
+            "https://ubuntu.com/security/notices/USN-6566-2",
+            "https://vuldb.com/?ctiid.248999",
+            "https://vuldb.com/?id.248999",
+            "https://www.cve.org/CVERecord?id=CVE-2023-7104"
+          ],
+          "PublishedDate": "2023-12-29T10:15:13.89Z",
+          "LastModifiedDate": "2024-11-21T08:45:17.067Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-1304",
+          "PkgID": "libss2@1.44.5-1+deb10u3",
+          "PkgName": "libss2",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libss2@1.44.5-1%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "ef2aceb6e1da5dd4"
+          },
+          "InstalledVersion": "1.44.5-1+deb10u3",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1304",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "e2fsprogs: out-of-bounds read/write via crafted filesystem",
+          "Description": "An out-of-bounds read/write vulnerability was found in e2fsprogs 1.46.5. This issue leads to a segmentation fault and possibly arbitrary code execution via a specially crafted filesystem.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:H",
+              "V3Score": 5.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2022:8361",
+            "https://access.redhat.com/security/cve/CVE-2022-1304",
+            "https://bugzilla.redhat.com/2069726",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2069726",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304",
+            "https://errata.almalinux.org/9/ALSA-2022-8361.html",
+            "https://errata.rockylinux.org/RLSA-2022:8361",
+            "https://linux.oracle.com/cve/CVE-2022-1304.html",
+            "https://linux.oracle.com/errata/ELSA-2024-12731.html",
+            "https://lists.debian.org/debian-lts-announce/2024/10/msg00001.html",
+            "https://marc.info/?l=linux-ext4\u0026m=165056234501732\u0026w=2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-1304",
+            "https://security.netapp.com/advisory/ntap-20241122-0010/",
+            "https://ubuntu.com/security/notices/USN-5464-1",
+            "https://www.cve.org/CVERecord?id=CVE-2022-1304"
+          ],
+          "PublishedDate": "2022-04-14T21:15:08.49Z",
+          "LastModifiedDate": "2025-04-23T19:15:53.01Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2018-12886",
+          "PkgID": "libstdc++6@8.3.0-6",
+          "PkgName": "libstdc++6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libstdc%2B%2B6@8.3.0-6?arch=amd64\u0026distro=debian-10.13",
+            "UID": "42f772ca1cbb5878"
+          },
+          "InstalledVersion": "8.3.0-6",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2018-12886",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "gcc: spilling of stack protection address in cfgexpand.c and function.c leads to stack-overflow protection bypass",
+          "Description": "stack_protect_prologue in cfgexpand.c and stack_protect_epilogue in function.c in GNU Compiler Collection (GCC) 4.1 through 8 (under certain circumstances) generate instruction sequences when targeting ARM targets that spill the address of the stack protector guard, which allows an attacker to bypass the protection of -fstack-protector, -fstack-protector-all, -fstack-protector-strong, and -fstack-protector-explicit against stack overflow by controlling what the stack canary is compared against.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-209"
+          ],
+          "VendorSeverity": {
+            "nvd": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 8.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:H",
+              "V3Score": 6.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2018-12886",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=89d7557202d25a393666ac4c0f7dbdab31e452a2",
+            "https://gcc.gnu.org/viewcvs/gcc/trunk/gcc/config/arm/arm-protos.h?revision=266379\u0026view=markup",
+            "https://nvd.nist.gov/vuln/detail/CVE-2018-12886",
+            "https://www.cve.org/CVERecord?id=CVE-2018-12886",
+            "https://www.gnu.org/software/gcc/gcc-8/changes.html"
+          ],
+          "PublishedDate": "2019-05-22T19:29:00.297Z",
+          "LastModifiedDate": "2024-11-21T03:46:02.563Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-15847",
+          "PkgID": "libstdc++6@8.3.0-6",
+          "PkgName": "libstdc++6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libstdc%2B%2B6@8.3.0-6?arch=amd64\u0026distro=debian-10.13",
+            "UID": "42f772ca1cbb5878"
+          },
+          "InstalledVersion": "8.3.0-6",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-15847",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "gcc: POWER9 \"DARN\" RNG intrinsic produces repeated output",
+          "Description": "The POWER9 backend in GNU Compiler Collection (GCC) before version 10 could optimize multiple calls of the __builtin_darn intrinsic into a single call, thus reducing the entropy of the random number generator. This occurred because a volatile operation was not specified. For example, within a single execution of a program, the output of every __builtin_darn() call may be the same.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-331"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V2Score": 5,
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00056.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00057.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2020-05/msg00058.html",
+            "https://access.redhat.com/security/cve/CVE-2019-15847",
+            "https://gcc.gnu.org/bugzilla/show_bug.cgi?id=91481",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=457dac402027dd7e14543fbd59a75858422cf6c6",
+            "https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=e99bfdd2a8db732ea84cf0a6486707e5e821ad7e",
+            "https://linux.oracle.com/cve/CVE-2019-15847.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1864.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-15847",
+            "https://www.cve.org/CVERecord?id=CVE-2019-15847"
+          ],
+          "PublishedDate": "2019-09-02T23:15:10.837Z",
+          "LastModifiedDate": "2024-11-21T04:29:36.21Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-3843",
+          "PkgID": "libsystemd0@241-7~deb10u9",
+          "PkgName": "libsystemd0",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libsystemd0@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "aa67c4ff0e17a1d0"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-3843",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "systemd: services with DynamicUser can create SUID/SGID binaries",
+          "Description": "It was discovered that a systemd service that uses DynamicUser property can create a SUID/SGID binary that would be allowed to run as the transient service UID/GID even after the service is terminated. A local attacker may use this flaw to access resources that will be owned by a potentially different service in the future, when the UID/GID will be recycled.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-266",
+            "CWE-269"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:L/AC:L/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 4.6,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 4.5
+            }
+          },
+          "References": [
+            "http://www.securityfocus.com/bid/108116",
+            "https://access.redhat.com/security/cve/CVE-2019-3843",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3843",
+            "https://github.com/systemd/systemd-stable/pull/54 (backport for v241-stable)",
+            "https://linux.oracle.com/cve/CVE-2019-3843.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1794.html",
+            "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/5JXQAKSTMABZ46EVCRMW62DHWYHTTFES/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-3843",
+            "https://security.netapp.com/advisory/ntap-20190619-0002/",
+            "https://ubuntu.com/security/notices/USN-4269-1",
+            "https://usn.ubuntu.com/4269-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2019-3843"
+          ],
+          "PublishedDate": "2019-04-26T21:29:00.36Z",
+          "LastModifiedDate": "2024-11-21T04:42:41.073Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-3844",
+          "PkgID": "libsystemd0@241-7~deb10u9",
+          "PkgName": "libsystemd0",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libsystemd0@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "aa67c4ff0e17a1d0"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-3844",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "systemd: services with DynamicUser can get new privileges and create SGID binaries",
+          "Description": "It was discovered that a systemd service that uses DynamicUser property can get new privileges through the execution of SUID binaries, which would allow to create binaries owned by the service transient group with the setgid bit set. A local attacker may use this flaw to access resources that will be owned by a potentially different service in the future, when the GID will be recycled.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-268"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:L/AC:L/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 4.6,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 4.5
+            }
+          },
+          "References": [
+            "http://www.securityfocus.com/bid/108096",
+            "https://access.redhat.com/security/cve/CVE-2019-3844",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3844",
+            "https://linux.oracle.com/cve/CVE-2019-3844.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1794.html",
+            "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-3844",
+            "https://security.netapp.com/advisory/ntap-20190619-0002/",
+            "https://ubuntu.com/security/notices/USN-4269-1",
+            "https://usn.ubuntu.com/4269-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2019-3844"
+          ],
+          "PublishedDate": "2019-04-26T21:29:00.423Z",
+          "LastModifiedDate": "2024-11-21T04:42:41.24Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-50387",
+          "PkgID": "libsystemd0@241-7~deb10u9",
+          "PkgName": "libsystemd0",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libsystemd0@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "aa67c4ff0e17a1d0"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-50387",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "bind9: KeyTrap - Extreme CPU consumption in DNSSEC validator",
+          "Description": "Certain DNSSEC aspects of the DNS protocol (in RFC 4033, 4034, 4035, 6840, and related RFCs) allow remote attackers to cause a denial of service (CPU consumption) via one or more DNSSEC responses, aka the \"KeyTrap\" issue. One of the concerns is that, when there is a zone with many DNSKEY and RRSIG records, the protocol specification implies that an algorithm must evaluate all combinations of DNSKEY and RRSIG records.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/02/16/2",
+            "http://www.openwall.com/lists/oss-security/2024/02/16/3",
+            "https://access.redhat.com/errata/RHSA-2024:2551",
+            "https://access.redhat.com/security/cve/CVE-2023-50387",
+            "https://blog.powerdns.com/2024/02/13/powerdns-recursor-4-8-6-4-9-3-5-0-2-released",
+            "https://bugzilla.redhat.com/2263896",
+            "https://bugzilla.redhat.com/2263897",
+            "https://bugzilla.redhat.com/2263909",
+            "https://bugzilla.redhat.com/2263911",
+            "https://bugzilla.redhat.com/2263914",
+            "https://bugzilla.redhat.com/2263917",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263896",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263897",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263909",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263911",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263914",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263917",
+            "https://bugzilla.suse.com/show_bug.cgi?id=1219823",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4408",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50387",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50868",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5517",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5679",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6516",
+            "https://docs.powerdns.com/recursor/security-advisories/powerdns-advisory-2024-01.html",
+            "https://errata.almalinux.org/9/ALSA-2024-2551.html",
+            "https://errata.rockylinux.org/RLSA-2024:2551",
+            "https://gitlab.nic.cz/knot/knot-resolver/-/releases/v5.7.1",
+            "https://kb.isc.org/docs/cve-2023-50387",
+            "https://linux.oracle.com/cve/CVE-2023-50387.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3741.html",
+            "https://lists.debian.org/debian-lts-announce/2024/02/msg00006.html",
+            "https://lists.debian.org/debian-lts-announce/2024/05/msg00011.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6FV5O347JTX7P5OZA6NGO4MKTXRXMKOZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/BUIP7T7Z4T3UHLXFWG6XIVDP4GYPD3AI/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/HVRDSJVZKMCXKKPP6PNR62T7RWZ3YSDZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/IGSLGKUAQTW5JPPZCMF5YPEYALLRUZZ6/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/PNNHZSZPG2E7NBMBNYPGHCFI4V4XRWNQ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/RGS7JN6FZXUSTC2XKQHH27574XOULYYJ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SVYA42BLXUCIDLD35YIJPJSHDIADNYMP/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/TEXGOYGW7DBS3N2QSSQONZ4ENIRQEAPG/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/UQESRWMJCF4JEYJEAKLRM6CT55GLJAB7/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZDZFMEKQTZ4L7RY46FCENWFB5MDT263R/",
+            "https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2024q1/017430.html",
+            "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-50387",
+            "https://news.ycombinator.com/item?id=39367411",
+            "https://news.ycombinator.com/item?id=39372384",
+            "https://nlnetlabs.nl/downloads/unbound/CVE-2023-50387_CVE-2023-50868.txt",
+            "https://nlnetlabs.nl/news/2024/Feb/13/unbound-1.19.1-released/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-50387",
+            "https://security.netapp.com/advisory/ntap-20240307-0007/",
+            "https://ubuntu.com/security/notices/USN-6633-1",
+            "https://ubuntu.com/security/notices/USN-6642-1",
+            "https://ubuntu.com/security/notices/USN-6657-1",
+            "https://ubuntu.com/security/notices/USN-6657-2",
+            "https://ubuntu.com/security/notices/USN-6665-1",
+            "https://ubuntu.com/security/notices/USN-6723-1",
+            "https://www.athene-center.de/aktuelles/key-trap",
+            "https://www.athene-center.de/fileadmin/content/PDF/Technical_Report_KeyTrap.pdf",
+            "https://www.cve.org/CVERecord?id=CVE-2023-50387",
+            "https://www.isc.org/blogs/2024-bind-security-release/",
+            "https://www.knot-resolver.cz/2024-02-13-knot-resolver-5.7.1.html",
+            "https://www.securityweek.com/keytrap-dns-attack-could-disable-large-parts-of-internet-researchers/",
+            "https://www.theregister.com/2024/02/13/dnssec_vulnerability_internet/"
+          ],
+          "PublishedDate": "2024-02-14T16:15:45.3Z",
+          "LastModifiedDate": "2025-05-12T15:15:56.673Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-50868",
+          "PkgID": "libsystemd0@241-7~deb10u9",
+          "PkgName": "libsystemd0",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libsystemd0@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "aa67c4ff0e17a1d0"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-50868",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "bind9: Preparing an NSEC3 closest encloser proof can exhaust CPU resources",
+          "Description": "The Closest Encloser Proof aspect of the DNS protocol (in RFC 5155 when RFC 9276 guidance is skipped) allows remote attackers to cause a denial of service (CPU consumption for SHA-1 computations) via DNSSEC responses in a random subdomain attack, aka the \"NSEC3\" issue. The RFC 5155 specification implies that an algorithm must perform thousands of iterations of a hash function in certain situations.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/02/16/2",
+            "http://www.openwall.com/lists/oss-security/2024/02/16/3",
+            "https://access.redhat.com/errata/RHSA-2024:2551",
+            "https://access.redhat.com/security/cve/CVE-2023-50868",
+            "https://blog.powerdns.com/2024/02/13/powerdns-recursor-4-8-6-4-9-3-5-0-2-released",
+            "https://bugzilla.redhat.com/2263896",
+            "https://bugzilla.redhat.com/2263897",
+            "https://bugzilla.redhat.com/2263909",
+            "https://bugzilla.redhat.com/2263911",
+            "https://bugzilla.redhat.com/2263914",
+            "https://bugzilla.redhat.com/2263917",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263896",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263897",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263909",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263911",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263914",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263917",
+            "https://bugzilla.suse.com/show_bug.cgi?id=1219826",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4408",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50387",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50868",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5517",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5679",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6516",
+            "https://datatracker.ietf.org/doc/html/rfc5155",
+            "https://docs.powerdns.com/recursor/security-advisories/powerdns-advisory-2024-01.html",
+            "https://errata.almalinux.org/9/ALSA-2024-2551.html",
+            "https://errata.rockylinux.org/RLSA-2024:2551",
+            "https://gitlab.nic.cz/knot/knot-resolver/-/releases/v5.7.1",
+            "https://kb.isc.org/docs/cve-2023-50868",
+            "https://linux.oracle.com/cve/CVE-2023-50868.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3741.html",
+            "https://lists.debian.org/debian-lts-announce/2024/02/msg00006.html",
+            "https://lists.debian.org/debian-lts-announce/2024/05/msg00011.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6FV5O347JTX7P5OZA6NGO4MKTXRXMKOZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/BUIP7T7Z4T3UHLXFWG6XIVDP4GYPD3AI/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/HVRDSJVZKMCXKKPP6PNR62T7RWZ3YSDZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/IGSLGKUAQTW5JPPZCMF5YPEYALLRUZZ6/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/PNNHZSZPG2E7NBMBNYPGHCFI4V4XRWNQ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/RGS7JN6FZXUSTC2XKQHH27574XOULYYJ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SVYA42BLXUCIDLD35YIJPJSHDIADNYMP/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/TEXGOYGW7DBS3N2QSSQONZ4ENIRQEAPG/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/UQESRWMJCF4JEYJEAKLRM6CT55GLJAB7/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZDZFMEKQTZ4L7RY46FCENWFB5MDT263R/",
+            "https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2024q1/017430.html",
+            "https://nlnetlabs.nl/downloads/unbound/CVE-2023-50387_CVE-2023-50868.txt",
+            "https://nlnetlabs.nl/news/2024/Feb/13/unbound-1.19.1-released/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-50868",
+            "https://security.netapp.com/advisory/ntap-20240307-0008/",
+            "https://ubuntu.com/security/notices/USN-6633-1",
+            "https://ubuntu.com/security/notices/USN-6642-1",
+            "https://ubuntu.com/security/notices/USN-6657-1",
+            "https://ubuntu.com/security/notices/USN-6657-2",
+            "https://ubuntu.com/security/notices/USN-6665-1",
+            "https://ubuntu.com/security/notices/USN-6723-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-50868",
+            "https://www.isc.org/blogs/2024-bind-security-release/",
+            "https://www.knot-resolver.cz/2024-02-13-knot-resolver-5.7.1.html"
+          ],
+          "PublishedDate": "2024-02-14T16:15:45.377Z",
+          "LastModifiedDate": "2025-05-12T15:15:56.977Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-39537",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "libtinfo6@6.1+20181013-2+deb10u3",
+          "PkgName": "libtinfo6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libtinfo6@6.1%2B20181013-2%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "ca93d43f479a0cfd"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-39537",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: heap-based buffer overflow in _nc_captoinfo() in captoinfo.c",
+          "Description": "An issue was discovered in ncurses through v6.2-1. _nc_captoinfo in captoinfo.c has a heap-based buffer overflow.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "photon": 3,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 8.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 5.5
+            }
+          },
+          "References": [
+            "http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/devel/ncurses/patches/patch-ncurses_tinfo_captoinfo.c?rev=1.1\u0026content-type=text/x-cvsweb-markup",
+            "http://seclists.org/fulldisclosure/2022/Oct/28",
+            "http://seclists.org/fulldisclosure/2022/Oct/41",
+            "http://seclists.org/fulldisclosure/2022/Oct/43",
+            "http://seclists.org/fulldisclosure/2022/Oct/45",
+            "https://access.redhat.com/security/cve/CVE-2021-39537",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2020-08/msg00006.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2021-10/msg00023.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-39537",
+            "https://security.netapp.com/advisory/ntap-20230427-0012/",
+            "https://support.apple.com/kb/HT213443",
+            "https://support.apple.com/kb/HT213444",
+            "https://support.apple.com/kb/HT213488",
+            "https://ubuntu.com/security/notices/USN-5477-1",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2021-39537"
+          ],
+          "PublishedDate": "2021-09-20T16:15:12.477Z",
+          "LastModifiedDate": "2024-11-21T06:19:38.517Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-29491",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "libtinfo6@6.1+20181013-2+deb10u3",
+          "PkgName": "libtinfo6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libtinfo6@6.1%2B20181013-2%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "ca93d43f479a0cfd"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-29491",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: Local users can trigger security-relevant memory corruption via malformed data",
+          "Description": "ncurses before 6.4 20230408, when used by a setuid application, allows local users to trigger security-relevant memory corruption via malformed data in a terminfo database file that is found in $HOME/.terminfo or reached via the TERMINFO or TERM environment variable.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git%3Ba=commit%3Bh=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git;a=commit;h=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/10",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/11",
+            "https://access.redhat.com/errata/RHSA-2023:6698",
+            "https://access.redhat.com/security/cve/CVE-2023-29491",
+            "https://bugzilla.redhat.com/2191704",
+            "https://errata.almalinux.org/9/ALSA-2023-6698.html",
+            "https://invisible-island.net/ncurses/NEWS.html#index-t20230408",
+            "https://linux.oracle.com/cve/CVE-2023-29491.html",
+            "https://linux.oracle.com/errata/ELSA-2023-6698.html",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/LU4MYMKFEZQ5VSCVLRIZGDQOUW3T44GT/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-29491",
+            "https://security.netapp.com/advisory/ntap-20230517-0009/",
+            "https://support.apple.com/kb/HT213843",
+            "https://support.apple.com/kb/HT213844",
+            "https://support.apple.com/kb/HT213845",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-29491",
+            "https://www.openwall.com/lists/oss-security/2023/04/12/5",
+            "https://www.openwall.com/lists/oss-security/2023/04/13/4"
+          ],
+          "PublishedDate": "2023-04-14T01:15:08.57Z",
+          "LastModifiedDate": "2024-11-21T07:57:09.933Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-3843",
+          "PkgID": "libudev1@241-7~deb10u9",
+          "PkgName": "libudev1",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libudev1@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "910f8e0ab1fb72e1"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-3843",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "systemd: services with DynamicUser can create SUID/SGID binaries",
+          "Description": "It was discovered that a systemd service that uses DynamicUser property can create a SUID/SGID binary that would be allowed to run as the transient service UID/GID even after the service is terminated. A local attacker may use this flaw to access resources that will be owned by a potentially different service in the future, when the UID/GID will be recycled.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-266",
+            "CWE-269"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:L/AC:L/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 4.6,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 4.5
+            }
+          },
+          "References": [
+            "http://www.securityfocus.com/bid/108116",
+            "https://access.redhat.com/security/cve/CVE-2019-3843",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3843",
+            "https://github.com/systemd/systemd-stable/pull/54 (backport for v241-stable)",
+            "https://linux.oracle.com/cve/CVE-2019-3843.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1794.html",
+            "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/5JXQAKSTMABZ46EVCRMW62DHWYHTTFES/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-3843",
+            "https://security.netapp.com/advisory/ntap-20190619-0002/",
+            "https://ubuntu.com/security/notices/USN-4269-1",
+            "https://usn.ubuntu.com/4269-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2019-3843"
+          ],
+          "PublishedDate": "2019-04-26T21:29:00.36Z",
+          "LastModifiedDate": "2024-11-21T04:42:41.073Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2019-3844",
+          "PkgID": "libudev1@241-7~deb10u9",
+          "PkgName": "libudev1",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libudev1@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "910f8e0ab1fb72e1"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-3844",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "systemd: services with DynamicUser can get new privileges and create SGID binaries",
+          "Description": "It was discovered that a systemd service that uses DynamicUser property can get new privileges through the execution of SUID binaries, which would allow to create binaries owned by the service transient group with the setgid bit set. A local attacker may use this flaw to access resources that will be owned by a potentially different service in the future, when the GID will be recycled.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-268"
+          ],
+          "VendorSeverity": {
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:L/AC:L/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 4.6,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 4.5
+            }
+          },
+          "References": [
+            "http://www.securityfocus.com/bid/108096",
+            "https://access.redhat.com/security/cve/CVE-2019-3844",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3844",
+            "https://linux.oracle.com/cve/CVE-2019-3844.html",
+            "https://linux.oracle.com/errata/ELSA-2020-1794.html",
+            "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4%40%3Cissues.bookkeeper.apache.org%3E",
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-3844",
+            "https://security.netapp.com/advisory/ntap-20190619-0002/",
+            "https://ubuntu.com/security/notices/USN-4269-1",
+            "https://usn.ubuntu.com/4269-1/",
+            "https://www.cve.org/CVERecord?id=CVE-2019-3844"
+          ],
+          "PublishedDate": "2019-04-26T21:29:00.423Z",
+          "LastModifiedDate": "2024-11-21T04:42:41.24Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-50387",
+          "PkgID": "libudev1@241-7~deb10u9",
+          "PkgName": "libudev1",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libudev1@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "910f8e0ab1fb72e1"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-50387",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "bind9: KeyTrap - Extreme CPU consumption in DNSSEC validator",
+          "Description": "Certain DNSSEC aspects of the DNS protocol (in RFC 4033, 4034, 4035, 6840, and related RFCs) allow remote attackers to cause a denial of service (CPU consumption) via one or more DNSSEC responses, aka the \"KeyTrap\" issue. One of the concerns is that, when there is a zone with many DNSKEY and RRSIG records, the protocol specification implies that an algorithm must evaluate all combinations of DNSKEY and RRSIG records.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/02/16/2",
+            "http://www.openwall.com/lists/oss-security/2024/02/16/3",
+            "https://access.redhat.com/errata/RHSA-2024:2551",
+            "https://access.redhat.com/security/cve/CVE-2023-50387",
+            "https://blog.powerdns.com/2024/02/13/powerdns-recursor-4-8-6-4-9-3-5-0-2-released",
+            "https://bugzilla.redhat.com/2263896",
+            "https://bugzilla.redhat.com/2263897",
+            "https://bugzilla.redhat.com/2263909",
+            "https://bugzilla.redhat.com/2263911",
+            "https://bugzilla.redhat.com/2263914",
+            "https://bugzilla.redhat.com/2263917",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263896",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263897",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263909",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263911",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263914",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263917",
+            "https://bugzilla.suse.com/show_bug.cgi?id=1219823",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4408",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50387",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50868",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5517",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5679",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6516",
+            "https://docs.powerdns.com/recursor/security-advisories/powerdns-advisory-2024-01.html",
+            "https://errata.almalinux.org/9/ALSA-2024-2551.html",
+            "https://errata.rockylinux.org/RLSA-2024:2551",
+            "https://gitlab.nic.cz/knot/knot-resolver/-/releases/v5.7.1",
+            "https://kb.isc.org/docs/cve-2023-50387",
+            "https://linux.oracle.com/cve/CVE-2023-50387.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3741.html",
+            "https://lists.debian.org/debian-lts-announce/2024/02/msg00006.html",
+            "https://lists.debian.org/debian-lts-announce/2024/05/msg00011.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6FV5O347JTX7P5OZA6NGO4MKTXRXMKOZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/BUIP7T7Z4T3UHLXFWG6XIVDP4GYPD3AI/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/HVRDSJVZKMCXKKPP6PNR62T7RWZ3YSDZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/IGSLGKUAQTW5JPPZCMF5YPEYALLRUZZ6/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/PNNHZSZPG2E7NBMBNYPGHCFI4V4XRWNQ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/RGS7JN6FZXUSTC2XKQHH27574XOULYYJ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SVYA42BLXUCIDLD35YIJPJSHDIADNYMP/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/TEXGOYGW7DBS3N2QSSQONZ4ENIRQEAPG/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/UQESRWMJCF4JEYJEAKLRM6CT55GLJAB7/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZDZFMEKQTZ4L7RY46FCENWFB5MDT263R/",
+            "https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2024q1/017430.html",
+            "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-50387",
+            "https://news.ycombinator.com/item?id=39367411",
+            "https://news.ycombinator.com/item?id=39372384",
+            "https://nlnetlabs.nl/downloads/unbound/CVE-2023-50387_CVE-2023-50868.txt",
+            "https://nlnetlabs.nl/news/2024/Feb/13/unbound-1.19.1-released/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-50387",
+            "https://security.netapp.com/advisory/ntap-20240307-0007/",
+            "https://ubuntu.com/security/notices/USN-6633-1",
+            "https://ubuntu.com/security/notices/USN-6642-1",
+            "https://ubuntu.com/security/notices/USN-6657-1",
+            "https://ubuntu.com/security/notices/USN-6657-2",
+            "https://ubuntu.com/security/notices/USN-6665-1",
+            "https://ubuntu.com/security/notices/USN-6723-1",
+            "https://www.athene-center.de/aktuelles/key-trap",
+            "https://www.athene-center.de/fileadmin/content/PDF/Technical_Report_KeyTrap.pdf",
+            "https://www.cve.org/CVERecord?id=CVE-2023-50387",
+            "https://www.isc.org/blogs/2024-bind-security-release/",
+            "https://www.knot-resolver.cz/2024-02-13-knot-resolver-5.7.1.html",
+            "https://www.securityweek.com/keytrap-dns-attack-could-disable-large-parts-of-internet-researchers/",
+            "https://www.theregister.com/2024/02/13/dnssec_vulnerability_internet/"
+          ],
+          "PublishedDate": "2024-02-14T16:15:45.3Z",
+          "LastModifiedDate": "2025-05-12T15:15:56.673Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-50868",
+          "PkgID": "libudev1@241-7~deb10u9",
+          "PkgName": "libudev1",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/libudev1@241-7~deb10u9?arch=amd64\u0026distro=debian-10.13",
+            "UID": "910f8e0ab1fb72e1"
+          },
+          "InstalledVersion": "241-7~deb10u9",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-50868",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "bind9: Preparing an NSEC3 closest encloser proof can exhaust CPU resources",
+          "Description": "The Closest Encloser Proof aspect of the DNS protocol (in RFC 5155 when RFC 9276 guidance is skipped) allows remote attackers to cause a denial of service (CPU consumption for SHA-1 computations) via DNSSEC responses in a random subdomain attack, aka the \"NSEC3\" issue. The RFC 5155 specification implies that an algorithm must perform thousands of iterations of a hash function in certain situations.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/02/16/2",
+            "http://www.openwall.com/lists/oss-security/2024/02/16/3",
+            "https://access.redhat.com/errata/RHSA-2024:2551",
+            "https://access.redhat.com/security/cve/CVE-2023-50868",
+            "https://blog.powerdns.com/2024/02/13/powerdns-recursor-4-8-6-4-9-3-5-0-2-released",
+            "https://bugzilla.redhat.com/2263896",
+            "https://bugzilla.redhat.com/2263897",
+            "https://bugzilla.redhat.com/2263909",
+            "https://bugzilla.redhat.com/2263911",
+            "https://bugzilla.redhat.com/2263914",
+            "https://bugzilla.redhat.com/2263917",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263896",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263897",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263909",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263911",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263914",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2263917",
+            "https://bugzilla.suse.com/show_bug.cgi?id=1219826",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4408",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50387",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50868",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5517",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5679",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6516",
+            "https://datatracker.ietf.org/doc/html/rfc5155",
+            "https://docs.powerdns.com/recursor/security-advisories/powerdns-advisory-2024-01.html",
+            "https://errata.almalinux.org/9/ALSA-2024-2551.html",
+            "https://errata.rockylinux.org/RLSA-2024:2551",
+            "https://gitlab.nic.cz/knot/knot-resolver/-/releases/v5.7.1",
+            "https://kb.isc.org/docs/cve-2023-50868",
+            "https://linux.oracle.com/cve/CVE-2023-50868.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3741.html",
+            "https://lists.debian.org/debian-lts-announce/2024/02/msg00006.html",
+            "https://lists.debian.org/debian-lts-announce/2024/05/msg00011.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6FV5O347JTX7P5OZA6NGO4MKTXRXMKOZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/BUIP7T7Z4T3UHLXFWG6XIVDP4GYPD3AI/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/HVRDSJVZKMCXKKPP6PNR62T7RWZ3YSDZ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/IGSLGKUAQTW5JPPZCMF5YPEYALLRUZZ6/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/PNNHZSZPG2E7NBMBNYPGHCFI4V4XRWNQ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/RGS7JN6FZXUSTC2XKQHH27574XOULYYJ/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SVYA42BLXUCIDLD35YIJPJSHDIADNYMP/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/TEXGOYGW7DBS3N2QSSQONZ4ENIRQEAPG/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/UQESRWMJCF4JEYJEAKLRM6CT55GLJAB7/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZDZFMEKQTZ4L7RY46FCENWFB5MDT263R/",
+            "https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2024q1/017430.html",
+            "https://nlnetlabs.nl/downloads/unbound/CVE-2023-50387_CVE-2023-50868.txt",
+            "https://nlnetlabs.nl/news/2024/Feb/13/unbound-1.19.1-released/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-50868",
+            "https://security.netapp.com/advisory/ntap-20240307-0008/",
+            "https://ubuntu.com/security/notices/USN-6633-1",
+            "https://ubuntu.com/security/notices/USN-6642-1",
+            "https://ubuntu.com/security/notices/USN-6657-1",
+            "https://ubuntu.com/security/notices/USN-6657-2",
+            "https://ubuntu.com/security/notices/USN-6665-1",
+            "https://ubuntu.com/security/notices/USN-6723-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-50868",
+            "https://www.isc.org/blogs/2024-bind-security-release/",
+            "https://www.knot-resolver.cz/2024-02-13-knot-resolver-5.7.1.html"
+          ],
+          "PublishedDate": "2024-02-14T16:15:45.377Z",
+          "LastModifiedDate": "2025-05-12T15:15:56.977Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-39537",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "ncurses-base@6.1+20181013-2+deb10u3",
+          "PkgName": "ncurses-base",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/ncurses-base@6.1%2B20181013-2%2Bdeb10u3?arch=all\u0026distro=debian-10.13",
+            "UID": "1806e8dbd664cc8f"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-39537",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: heap-based buffer overflow in _nc_captoinfo() in captoinfo.c",
+          "Description": "An issue was discovered in ncurses through v6.2-1. _nc_captoinfo in captoinfo.c has a heap-based buffer overflow.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "photon": 3,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 8.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 5.5
+            }
+          },
+          "References": [
+            "http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/devel/ncurses/patches/patch-ncurses_tinfo_captoinfo.c?rev=1.1\u0026content-type=text/x-cvsweb-markup",
+            "http://seclists.org/fulldisclosure/2022/Oct/28",
+            "http://seclists.org/fulldisclosure/2022/Oct/41",
+            "http://seclists.org/fulldisclosure/2022/Oct/43",
+            "http://seclists.org/fulldisclosure/2022/Oct/45",
+            "https://access.redhat.com/security/cve/CVE-2021-39537",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2020-08/msg00006.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2021-10/msg00023.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-39537",
+            "https://security.netapp.com/advisory/ntap-20230427-0012/",
+            "https://support.apple.com/kb/HT213443",
+            "https://support.apple.com/kb/HT213444",
+            "https://support.apple.com/kb/HT213488",
+            "https://ubuntu.com/security/notices/USN-5477-1",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2021-39537"
+          ],
+          "PublishedDate": "2021-09-20T16:15:12.477Z",
+          "LastModifiedDate": "2024-11-21T06:19:38.517Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-29491",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "ncurses-base@6.1+20181013-2+deb10u3",
+          "PkgName": "ncurses-base",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/ncurses-base@6.1%2B20181013-2%2Bdeb10u3?arch=all\u0026distro=debian-10.13",
+            "UID": "1806e8dbd664cc8f"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-29491",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: Local users can trigger security-relevant memory corruption via malformed data",
+          "Description": "ncurses before 6.4 20230408, when used by a setuid application, allows local users to trigger security-relevant memory corruption via malformed data in a terminfo database file that is found in $HOME/.terminfo or reached via the TERMINFO or TERM environment variable.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git%3Ba=commit%3Bh=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git;a=commit;h=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/10",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/11",
+            "https://access.redhat.com/errata/RHSA-2023:6698",
+            "https://access.redhat.com/security/cve/CVE-2023-29491",
+            "https://bugzilla.redhat.com/2191704",
+            "https://errata.almalinux.org/9/ALSA-2023-6698.html",
+            "https://invisible-island.net/ncurses/NEWS.html#index-t20230408",
+            "https://linux.oracle.com/cve/CVE-2023-29491.html",
+            "https://linux.oracle.com/errata/ELSA-2023-6698.html",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/LU4MYMKFEZQ5VSCVLRIZGDQOUW3T44GT/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-29491",
+            "https://security.netapp.com/advisory/ntap-20230517-0009/",
+            "https://support.apple.com/kb/HT213843",
+            "https://support.apple.com/kb/HT213844",
+            "https://support.apple.com/kb/HT213845",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-29491",
+            "https://www.openwall.com/lists/oss-security/2023/04/12/5",
+            "https://www.openwall.com/lists/oss-security/2023/04/13/4"
+          ],
+          "PublishedDate": "2023-04-14T01:15:08.57Z",
+          "LastModifiedDate": "2024-11-21T07:57:09.933Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-39537",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "ncurses-bin@6.1+20181013-2+deb10u3",
+          "PkgName": "ncurses-bin",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/ncurses-bin@6.1%2B20181013-2%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "e5f2943107431649"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-39537",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: heap-based buffer overflow in _nc_captoinfo() in captoinfo.c",
+          "Description": "An issue was discovered in ncurses through v6.2-1. _nc_captoinfo in captoinfo.c has a heap-based buffer overflow.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "photon": 3,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 8.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 5.5
+            }
+          },
+          "References": [
+            "http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/devel/ncurses/patches/patch-ncurses_tinfo_captoinfo.c?rev=1.1\u0026content-type=text/x-cvsweb-markup",
+            "http://seclists.org/fulldisclosure/2022/Oct/28",
+            "http://seclists.org/fulldisclosure/2022/Oct/41",
+            "http://seclists.org/fulldisclosure/2022/Oct/43",
+            "http://seclists.org/fulldisclosure/2022/Oct/45",
+            "https://access.redhat.com/security/cve/CVE-2021-39537",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2020-08/msg00006.html",
+            "https://lists.gnu.org/archive/html/bug-ncurses/2021-10/msg00023.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-39537",
+            "https://security.netapp.com/advisory/ntap-20230427-0012/",
+            "https://support.apple.com/kb/HT213443",
+            "https://support.apple.com/kb/HT213444",
+            "https://support.apple.com/kb/HT213488",
+            "https://ubuntu.com/security/notices/USN-5477-1",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2021-39537"
+          ],
+          "PublishedDate": "2021-09-20T16:15:12.477Z",
+          "LastModifiedDate": "2024-11-21T06:19:38.517Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-29491",
+          "VendorIDs": [
+            "DLA-3682-1"
+          ],
+          "PkgID": "ncurses-bin@6.1+20181013-2+deb10u3",
+          "PkgName": "ncurses-bin",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/ncurses-bin@6.1%2B20181013-2%2Bdeb10u3?arch=amd64\u0026distro=debian-10.13",
+            "UID": "e5f2943107431649"
+          },
+          "InstalledVersion": "6.1+20181013-2+deb10u3",
+          "FixedVersion": "6.1+20181013-2+deb10u5",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-29491",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "ncurses: Local users can trigger security-relevant memory corruption via malformed data",
+          "Description": "ncurses before 6.4 20230408, when used by a setuid application, allows local users to trigger security-relevant memory corruption via malformed data in a terminfo database file that is found in $HOME/.terminfo or reached via the TERMINFO or TERM environment variable.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git%3Ba=commit%3Bh=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://ncurses.scripts.mit.edu/?p=ncurses.git;a=commit;h=eb51b1ea1f75a0ec17c9c5937cb28df1e8eeec56",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/10",
+            "http://www.openwall.com/lists/oss-security/2023/04/19/11",
+            "https://access.redhat.com/errata/RHSA-2023:6698",
+            "https://access.redhat.com/security/cve/CVE-2023-29491",
+            "https://bugzilla.redhat.com/2191704",
+            "https://errata.almalinux.org/9/ALSA-2023-6698.html",
+            "https://invisible-island.net/ncurses/NEWS.html#index-t20230408",
+            "https://linux.oracle.com/cve/CVE-2023-29491.html",
+            "https://linux.oracle.com/errata/ELSA-2023-6698.html",
+            "https://lists.debian.org/debian-lts-announce/2023/12/msg00004.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/LU4MYMKFEZQ5VSCVLRIZGDQOUW3T44GT/",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-29491",
+            "https://security.netapp.com/advisory/ntap-20230517-0009/",
+            "https://support.apple.com/kb/HT213843",
+            "https://support.apple.com/kb/HT213844",
+            "https://support.apple.com/kb/HT213845",
+            "https://ubuntu.com/security/notices/USN-6099-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-29491",
+            "https://www.openwall.com/lists/oss-security/2023/04/12/5",
+            "https://www.openwall.com/lists/oss-security/2023/04/13/4"
+          ],
+          "PublishedDate": "2023-04-14T01:15:08.57Z",
+          "LastModifiedDate": "2024-11-21T07:57:09.933Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2020-16156",
+          "PkgID": "perl-base@5.28.1-6+deb10u1",
+          "PkgName": "perl-base",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/perl-base@5.28.1-6%2Bdeb10u1?arch=amd64\u0026distro=debian-10.13",
+            "UID": "640629bdfa8406cb"
+          },
+          "InstalledVersion": "5.28.1-6+deb10u1",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-16156",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "perl-CPAN: Bypass of verification of signatures in CHECKSUMS files",
+          "Description": "CPAN 2.28 allows Signature Verification Bypass.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-347"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V2Score": 6.8,
+              "V3Score": 7.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V3Score": 7.8
+            }
+          },
+          "References": [
+            "http://blogs.perl.org/users/neilb/2021/11/addressing-cpan-vulnerabilities-related-to-checksums.html",
+            "https://access.redhat.com/errata/RHSA-2025:8432",
+            "https://access.redhat.com/security/cve/CVE-2020-16156",
+            "https://blog.hackeriet.no/cpan-signature-verification-vulnerabilities/",
+            "https://bugzilla.redhat.com/2035273",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2035273",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-16156",
+            "https://errata.almalinux.org/8/ALSA-2025-8432.html",
+            "https://errata.rockylinux.org/RLSA-2025:8432",
+            "https://linux.oracle.com/cve/CVE-2020-16156.html",
+            "https://linux.oracle.com/errata/ELSA-2025-8432.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SD6RYOJII7HRJ6WVORFNVTYNOFY5JDXN/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SZ32AJIV4RHJMLWLU5QULGKMMIHYOMDC/",
+            "https://metacpan.org/pod/distribution/CPAN/scripts/cpan",
+            "https://nvd.nist.gov/vuln/detail/CVE-2020-16156",
+            "https://ubuntu.com/security/notices/USN-5689-1",
+            "https://ubuntu.com/security/notices/USN-5689-2",
+            "https://www.cve.org/CVERecord?id=CVE-2020-16156"
+          ],
+          "PublishedDate": "2021-12-13T18:15:07.943Z",
+          "LastModifiedDate": "2024-11-21T05:06:52.107Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-31484",
+          "PkgID": "perl-base@5.28.1-6+deb10u1",
+          "PkgName": "perl-base",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/perl-base@5.28.1-6%2Bdeb10u1?arch=amd64\u0026distro=debian-10.13",
+            "UID": "640629bdfa8406cb"
+          },
+          "InstalledVersion": "5.28.1-6+deb10u1",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-31484",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "perl: CPAN.pm does not verify TLS certificates when downloading distributions over HTTPS",
+          "Description": "CPAN.pm before 2.35 does not verify TLS certificates when downloading distributions over HTTPS.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-295"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "cbl-mariner": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 7.4
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/04/29/1",
+            "http://www.openwall.com/lists/oss-security/2023/05/03/3",
+            "http://www.openwall.com/lists/oss-security/2023/05/03/5",
+            "http://www.openwall.com/lists/oss-security/2023/05/07/2",
+            "https://access.redhat.com/errata/RHSA-2023:6539",
+            "https://access.redhat.com/security/cve/CVE-2023-31484",
+            "https://blog.hackeriet.no/perl-http-tiny-insecure-tls-default-affects-cpan-modules/",
+            "https://bugzilla.redhat.com/2218667",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2218667",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31484",
+            "https://errata.almalinux.org/9/ALSA-2023-6539.html",
+            "https://errata.rockylinux.org/RLSA-2023:6539",
+            "https://github.com/andk/cpanpm/commit/9c98370287f4e709924aee7c58ef21c85289a7f0 (2.35-TRIAL)",
+            "https://github.com/andk/cpanpm/pull/175",
+            "https://linux.oracle.com/cve/CVE-2023-31484.html",
+            "https://linux.oracle.com/errata/ELSA-2024-3094.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/BM6UW55CNFUTNGD5ZRKGUKKKFDJGMFHL/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/LEGCEOKFJVBJ2QQ6S2H4NAEWTUERC7SB/",
+            "https://metacpan.org/dist/CPAN/changes",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-31484",
+            "https://security.netapp.com/advisory/ntap-20240621-0007/",
+            "https://ubuntu.com/security/notices/USN-6112-1",
+            "https://ubuntu.com/security/notices/USN-6112-2",
+            "https://www.cve.org/CVERecord?id=CVE-2023-31484",
+            "https://www.openwall.com/lists/oss-security/2023/04/18/14"
+          ],
+          "PublishedDate": "2023-04-29T00:15:09Z",
+          "LastModifiedDate": "2024-11-21T08:01:57.707Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2023-45853",
+          "PkgID": "zlib1g@1:1.2.11.dfsg-1+deb10u2",
+          "PkgName": "zlib1g",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/debian/zlib1g@1.2.11.dfsg-1%2Bdeb10u2?arch=amd64\u0026distro=debian-10.13\u0026epoch=1",
+            "UID": "2ff99491c02ef5bb"
+          },
+          "InstalledVersion": "1:1.2.11.dfsg-1+deb10u2",
+          "Status": "will_not_fix",
+          "Layer": {
+            "DiffID": "sha256:e2ef8a51359d088511d34c725305c220294a1fcd5fe5e5dbe4d698c7239ce2c9"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-45853",
+          "DataSource": {
+            "ID": "debian",
+            "Name": "Debian Security Tracker",
+            "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+          },
+          "Title": "zlib: integer overflow and resultant heap-based buffer overflow in zipOpenNewFileInZip4_6",
+          "Description": "MiniZip in zlib through 1.3 has an integer overflow and resultant heap-based buffer overflow in zipOpenNewFileInZip4_64 via a long filename, comment, or extra field. NOTE: MiniZip is not a supported part of the zlib product. NOTE: pyminizip through 0.2.6 is also vulnerable because it bundles an affected zlib version, and exposes the applicable MiniZip code through its compress API.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-190"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "azure": 3,
+            "cbl-mariner": 4,
+            "ghsa": 4,
+            "nvd": 4,
+            "photon": 4,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2023/10/20/9",
+            "http://www.openwall.com/lists/oss-security/2024/01/24/10",
+            "https://access.redhat.com/security/cve/CVE-2023-45853",
+            "https://chromium.googlesource.com/chromium/src/+/d709fb23806858847131027da95ef4c548813356",
+            "https://chromium.googlesource.com/chromium/src/+/de29dd6c7151d3cd37cb4cf0036800ddfb1d8b61",
+            "https://github.com/madler/zlib/blob/ac8f12c97d1afd9bafa9c710f827d40a407d3266/contrib/README.contrib#L1-L4",
+            "https://github.com/madler/zlib/commit/73331a6a0481067628f065ffe87bb1d8f787d10c",
+            "https://github.com/madler/zlib/pull/843",
+            "https://github.com/smihica/pyminizip",
+            "https://github.com/smihica/pyminizip/blob/master/zlib-1.2.11/contrib/minizip/zip.c",
+            "https://lists.debian.org/debian-lts-announce/2023/11/msg00026.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-45853",
+            "https://pypi.org/project/pyminizip/#history",
+            "https://security.gentoo.org/glsa/202401-18",
+            "https://security.netapp.com/advisory/ntap-20231130-0009",
+            "https://security.netapp.com/advisory/ntap-20231130-0009/",
+            "https://ubuntu.com/security/notices/USN-7107-1",
+            "https://www.cve.org/CVERecord?id=CVE-2023-45853",
+            "https://www.winimage.com/zLibDll/minizip.html"
+          ],
+          "PublishedDate": "2023-10-14T02:15:09.323Z",
+          "LastModifiedDate": "2024-12-20T17:41:31.237Z"
+        }
+      ]
+    },
+    {
+      "Target": "Python",
+      "Class": "lang-pkgs",
+      "Type": "python-pkg",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2022-40897",
+          "PkgName": "setuptools",
+          "PkgPath": "usr/local/lib/python3.9/site-packages/setuptools-58.1.0.dist-info/METADATA",
+          "PkgIdentifier": {
+            "PURL": "pkg:pypi/setuptools@58.1.0",
+            "UID": "a31a7b733078920c"
+          },
+          "InstalledVersion": "58.1.0",
+          "FixedVersion": "65.5.1",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:067ea27560c1b4abe60cab2335c24e824b74705d534e8d9e561660c116ceb1d0"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-40897",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory pip",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+          },
+          "Title": "pypa-setuptools: Regular Expression Denial of Service (ReDoS) in package_index.py",
+          "Description": "Python Packaging Authority (PyPA) setuptools before 65.5.1 allows remote attackers to cause a denial of service via HTML in a crafted package or custom PackageIndex page. There is a Regular Expression Denial of Service (ReDoS) in package_index.py.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-1333"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "bitnami": 2,
+            "cbl-mariner": 2,
+            "ghsa": 3,
+            "nvd": 2,
+            "oracle-oval": 2,
+            "photon": 2,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "bitnami": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            },
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2023:0952",
+            "https://access.redhat.com/security/cve/CVE-2022-40897",
+            "https://bugzilla.redhat.com/2158559",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2158559",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40897",
+            "https://errata.almalinux.org/9/ALSA-2023-0952.html",
+            "https://errata.rockylinux.org/RLSA-2023:0952",
+            "https://github.com/pypa/advisory-database/tree/main/vulns/setuptools/PYSEC-2022-43012.yaml",
+            "https://github.com/pypa/setuptools",
+            "https://github.com/pypa/setuptools/blob/fe8a98e696241487ba6ac9f91faa38ade939ec5d/setuptools/package_index.py#L200",
+            "https://github.com/pypa/setuptools/commit/43a9c9bfa6aa626ec2a22540bea28d2ca77964be",
+            "https://github.com/pypa/setuptools/compare/v65.5.0...v65.5.1",
+            "https://github.com/pypa/setuptools/issues/3659",
+            "https://linux.oracle.com/cve/CVE-2022-40897.html",
+            "https://linux.oracle.com/errata/ELSA-2024-2987.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R/",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H/",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ADES3NLOE5QJKBLGNZNI2RGVOSQXA37R",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YNA2BAH2ACBZ4TVJZKFLCR7L23BG5C3H",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-40897",
+            "https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages",
+            "https://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages/",
+            "https://pyup.io/vulnerabilities/CVE-2022-40897/52495",
+            "https://pyup.io/vulnerabilities/CVE-2022-40897/52495/",
+            "https://security.netapp.com/advisory/ntap-20230214-0001",
+            "https://security.netapp.com/advisory/ntap-20230214-0001/",
+            "https://security.netapp.com/advisory/ntap-20240621-0006",
+            "https://security.netapp.com/advisory/ntap-20240621-0006/",
+            "https://setuptools.pypa.io/en/latest",
+            "https://ubuntu.com/security/notices/USN-5817-1",
+            "https://www.cve.org/CVERecord?id=CVE-2022-40897"
+          ],
+          "PublishedDate": "2022-12-23T00:15:13.987Z",
+          "LastModifiedDate": "2024-11-21T07:22:13.787Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-6345",
+          "PkgName": "setuptools",
+          "PkgPath": "usr/local/lib/python3.9/site-packages/setuptools-58.1.0.dist-info/METADATA",
+          "PkgIdentifier": {
+            "PURL": "pkg:pypi/setuptools@58.1.0",
+            "UID": "a31a7b733078920c"
+          },
+          "InstalledVersion": "58.1.0",
+          "FixedVersion": "70.0.0",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:067ea27560c1b4abe60cab2335c24e824b74705d534e8d9e561660c116ceb1d0"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-6345",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory pip",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+          },
+          "Title": "pypa/setuptools: Remote code execution via download functions in the package_index module in pypa/setuptools",
+          "Description": "A vulnerability in the package_index module of pypa/setuptools versions up to 69.1.1 allows for remote code execution via its download functions. These functions, which are used to download packages from URLs provided by users or retrieved from package index servers, are susceptible to code injection. If these functions are exposed to user-controlled inputs, such as package URLs, they can execute arbitrary commands on the system. The issue is fixed in version 70.0.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-94"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "azure": 3,
+            "bitnami": 3,
+            "cbl-mariner": 3,
+            "ghsa": 3,
+            "oracle-oval": 3,
+            "photon": 3,
+            "redhat": 3,
+            "rocky": 3,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "bitnami": {
+              "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            },
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2024:6726",
+            "https://access.redhat.com/security/cve/CVE-2024-6345",
+            "https://bugzilla.redhat.com/2297771",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2297771",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6345",
+            "https://errata.almalinux.org/9/ALSA-2024-6726.html",
+            "https://errata.rockylinux.org/RLSA-2024:6726",
+            "https://github.com/pypa/setuptools",
+            "https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0",
+            "https://github.com/pypa/setuptools/pull/4332",
+            "https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5",
+            "https://linux.oracle.com/cve/CVE-2024-6345.html",
+            "https://linux.oracle.com/errata/ELSA-2024-6726.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-6345",
+            "https://ubuntu.com/security/notices/USN-7002-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-6345"
+          ],
+          "PublishedDate": "2024-07-15T01:15:01.73Z",
+          "LastModifiedDate": "2024-11-21T09:49:28.17Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-47273",
+          "PkgName": "setuptools",
+          "PkgPath": "usr/local/lib/python3.9/site-packages/setuptools-58.1.0.dist-info/METADATA",
+          "PkgIdentifier": {
+            "PURL": "pkg:pypi/setuptools@58.1.0",
+            "UID": "a31a7b733078920c"
+          },
+          "InstalledVersion": "58.1.0",
+          "FixedVersion": "78.1.1",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:067ea27560c1b4abe60cab2335c24e824b74705d534e8d9e561660c116ceb1d0"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-47273",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory pip",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+          },
+          "Title": "setuptools: Path Traversal Vulnerability in setuptools PackageIndex",
+          "Description": "setuptools is a package that allows users to download, build, install, upgrade, and uninstall Python packages. A path traversal vulnerability in `PackageIndex` is present in setuptools prior to version 78.1.1. An attacker would be allowed to write files to arbitrary locations on the filesystem with the permissions of the process running the Python code, which could escalate to remote code execution depending on the context. Version 78.1.1 fixes the issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 3,
+            "azure": 3,
+            "bitnami": 3,
+            "ghsa": 3,
+            "nvd": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:L",
+              "V3Score": 7.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2025:9940",
+            "https://access.redhat.com/security/cve/CVE-2025-47273",
+            "https://bugzilla.redhat.com/2366982",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2366982",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-47273",
+            "https://errata.almalinux.org/10/ALSA-2025-9940.html",
+            "https://errata.rockylinux.org/RLSA-2025:11036",
+            "https://github.com/pypa/advisory-database/tree/main/vulns/setuptools/PYSEC-2025-49.yaml",
+            "https://github.com/pypa/setuptools",
+            "https://github.com/pypa/setuptools/blob/6ead555c5fb29bc57fe6105b1bffc163f56fd558/setuptools/package_index.py#L810C1-L825C88",
+            "https://github.com/pypa/setuptools/commit/250a6d17978f9f6ac3ac887091f2d32886fbbb0b",
+            "https://github.com/pypa/setuptools/issues/4946",
+            "https://github.com/pypa/setuptools/security/advisories/GHSA-5rjg-fvgr-3xxf",
+            "https://linux.oracle.com/cve/CVE-2025-47273.html",
+            "https://linux.oracle.com/errata/ELSA-2025-9940.html",
+            "https://lists.debian.org/debian-lts-announce/2025/05/msg00035.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-47273",
+            "https://ubuntu.com/security/notices/USN-7544-1",
+            "https://www.cve.org/CVERecord?id=CVE-2025-47273"
+          ],
+          "PublishedDate": "2025-05-17T16:15:19.11Z",
+          "LastModifiedDate": "2025-06-12T16:29:01.66Z"
+        }
+      ]
+    }
+  ]
+}
