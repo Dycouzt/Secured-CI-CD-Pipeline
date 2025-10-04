@@ -1,10 +1,14 @@
-# --- Build Stage ---
-# Use Debian 12 (Bookworm) which is currently supported
-FROM python:3.11-slim-bookworm AS builder
+# Stage 1: The Builder
+# Using a more recent version of Python and a newer OS (Bullseye) to inherit fewer vulnerabilities.
+FROM python:3.11-slim-bullseye as builder
 
-# Set working directory
+# Secure: Update OS packages and apply security patches BEFORE adding application code.
+# This reduces the attack surface from the very beginning.
+# The `-y` flag auto-confirms, and `rm -rf` cleans up the apt cache to keep the image small.
+RUN apt-get update && apt-get install -y --no-install-recommends gcc && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /usr/src/app
-
 # Set environment variables
 # Prevents Python from writing pyc files to disc
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -20,7 +24,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 
 
 # --- Final Stage ---
-FROM python:3.11-slim-bookworm
+FROM python:3.11-slim-bullseye
 
 # Create a non-root user for security
 RUN useradd --create-home appuser
