@@ -1,17 +1,12 @@
-# Dockerfile
+# Dockerfile - Production Hardened with Distroless
 
 # --- Build Stage ---
-# Use a specific version for reproducibility.
-FROM python:3.9-slim-buster AS builder
+FROM python:3.11-slim-bookworm AS builder
 
-# Set working directory
 WORKDIR /usr/src/app
 
-# Set environment variables
-# Prevents Python from writing pyc files to disc
-ENV PYTHONDONTWRITEBYTECODE 1
-# Prevents Python from buffering stdout and stderr
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Install build dependencies
 RUN pip install --upgrade pip
@@ -21,30 +16,29 @@ COPY ./app/requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 
-# --- Final Stage ---
-FROM python:3.9-slim-buster
+# --- Final Stage with Distroless ---
+# Distroless images contain only the application and runtime dependencies
+# No shell, package managers, or unnecessary OS utilities
+FROM gcr.io/distroless/python3-debian12:nonroot
 
-# Create a non-root user for security
-RUN useradd --create-home appuser
-WORKDIR /home/appuser
+# Set working directory
+WORKDIR /home/nonroot
 
-# Copy built wheels and application code from the builder stage
+# Copy wheels and install (distroless has pip)
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
-COPY ./app .
 
-# Install dependencies from local wheels to avoid hitting the network
-# This also ensures we use the exact packages from the build stage
+# Copy application code
+COPY --chown=nonroot:nonroot ./app .
+
+# Install Python dependencies
 RUN pip install --no-cache /wheels/*
 
-# Change ownership of the app directory to the non-root user
-RUN chown -R appuser:appuser /home/appuser
+# Distroless already runs as non-root user 'nonroot' (UID 65532)
+# No need to create user or switch
 
-# Switch to the non-root user
-USER appuser
-
-# Expose the port the app runs on
+# Expose the port
 EXPOSE 5000
 
-# Command to run the application using a production-grade server
+# Command to run the application
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]

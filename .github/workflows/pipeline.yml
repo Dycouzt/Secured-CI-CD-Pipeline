@@ -87,6 +87,8 @@ jobs:
         uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          config-path: .gitleaks.toml  # Has an allowklist with the fake AWS credential
       
       # Save Gitleaks report manually
       - name: Save Gitleaks Report
