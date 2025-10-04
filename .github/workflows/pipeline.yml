@@ -61,13 +61,25 @@ jobs:
           bandit -c security-tools/bandit-config.yml -r app/ -f json -o results/bandit-report.json --severity-level high
 
       # STAGE 3.2: Dependency Scanning (SCA) with Snyk
+      - name: Install Snyk CLI
+        id: install-snyk
+        run: |
+          npm install -g snyk
+          snyk --version
+
       - name: Run Snyk SCA Scan
         id: snyk-sca
-        uses: snyk/actions/python@9adf32b1121593767fc3c057af55b55db032dc04
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --file=app/requirements.txt --severity-threshold=high --json-file-output=results/snyk-report.json
+        run: |
+          snyk test --file=app/requirements.txt --severity-threshold=high --json-file-output=results/snyk-report.json || true
+          # Check if vulnerabilities were found
+          if snyk test --file=app/requirements.txt --severity-threshold=high; then
+            echo "✅ No high-severity vulnerabilities found"
+          else
+            echo "❌ High-severity vulnerabilities detected"
+            exit 1
+          fi
 
       # STAGE 3.3: Secret Detection with Gitleaks
       - name: Run Gitleaks Secret Scan
