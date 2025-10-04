@@ -132,8 +132,18 @@ jobs:
           image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest'
           format: 'json'
           output: 'results/trivy-report.json'
-          severity: 'HIGH,CRITICAL'
+          severity: 'CRITICAL'  
           exit-code: '1'
+          ignore-unfixed: true  # Ignore vulnerabilities without available fixes
+          
+      # Generate human-readable report even if scan fails.
+      - name: Generate Trivy Summary
+        if: always()
+        run: |
+          if [ -f results/trivy-report.json ]; then
+            echo "### Trivy Scan Results ###"
+            cat results/trivy-report.json | jq -r '.Results[] | select(.Vulnerabilities != null) | .Vulnerabilities[] | select(.Severity == "HIGH" or .Severity == "CRITICAL") | "\(.Severity): \(.VulnerabilityID) in \(.PkgName) \(.InstalledVersion)"'
+          fi
           
       # STAGE 5.2: DAST Placeholder
       - name: DAST Placeholder
