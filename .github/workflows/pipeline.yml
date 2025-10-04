@@ -85,9 +85,26 @@ jobs:
       - name: Run Gitleaks Secret Scan
         id: gitleaks-secrets
         uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
-        with:
-          report_path: results/gitleaks-report.json
-          report_format: json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Save Gitleaks report manually
+      - name: Save Gitleaks Report
+        id: save-gitleaks-report
+        if: failure() && steps.gitleaks-secrets.outcome == 'failure'
+        run: |
+          # The gitleaks-action outputs to gitleaks-report.json by default
+          if [ -f gitleaks-report.json ]; then
+            mkdir -p results
+            cp gitleaks-report.json results/gitleaks-report.json
+            echo "Gitleaks report saved to results/gitleaks-report.json"
+            
+            # Display summary
+            echo "### Gitleaks Findings ###"
+            cat gitleaks-report.json | jq -r '.[] | "Secret: \(.Description)\nFile: \(.File)\nLine: \(.StartLine)"'
+          else
+            echo "No gitleaks report found"
+          fi
 
       # STAGE 4.1: Set Up Docker Buildx
       - name: Set up Docker Buildx
