@@ -1,6 +1,6 @@
-# Secure CI/CD Pipeline (DevSecOps) with Google Cloud Deployment
+# Secure CI/CD Pipeline (DevSecOps)
 
-This project is a comprehensive, production-grade demonstration of DevSecOps practices integrated into a complete CI/CD pipeline. It showcases automated security testing across multiple layers (code, dependencies, secrets, containers) and implements continuous deployment to Google Cloud Run. The pipeline orchestrates six specialized security tools to create a security-first deployment workflow that blocks vulnerable code from reaching production.
+This project is a production-ready example of a fully integrated DevSecOps CI/CD pipeline. It automates security testing across every layer - source code, dependencies, secrets, and containers, while continuously deploying to Google Cloud Run. The pipeline combines six dedicated security tools to enforce a security-first workflow, ensuring that only verified, vulnerability-free code reaches production.
 
 ## Project Purpose & Key Features
 
@@ -153,7 +153,7 @@ This section demonstrates the pipeline's effectiveness through a real vulnerabil
 
 #### 1. SAST Failure - Bandit Scan
 
-![Bandit Failed Check](./assets/bandit-scan-failed.png)
+![Bandit Failed Check](./assets/bandit-scan-fail.png)
 
 **Vulnerabilities Detected:**
 - **SQL Injection (B608)** - MEDIUM severity, HIGH confidence
