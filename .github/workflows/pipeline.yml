@@ -170,7 +170,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # STAGE 6.3: Deploy to Docker Hub (Conditional)
+      # STAGE 6.3: Push to Docker Hub (Conditional)
       - name: Push to Docker Hub
         id: docker-push
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -180,3 +180,35 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
+        
+      # STAGE 6.4: Deploy to Google Cloud Run
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Cloud Run
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          gcloud run deploy secure-cicd-app \
+            --image ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:${{ github.sha }} \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated \
+            --port 5000 \
+            --project ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Get Service URL
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          SERVICE_URL=$(gcloud run services describe secure-cicd-app \
+            --platform managed \
+            --region us-central1 \
+            --format 'value(status.url)' \
+            --project ${{ secrets.GCP_PROJECT_ID }})
+          echo "### 🚀 Deployment Complete! ###"
+          echo "App URL: $SERVICE_URL"
+          echo "Test: curl $SERVICE_URL/health"
