@@ -122,7 +122,7 @@ jobs:
           file: ./Dockerfile
           push: false
           load: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:${{ github.sha }}
 
       # STAGE 5.1: Container Security Scan with Trivy
       - name: Run Trivy Vulnerability Scanner
@@ -179,7 +179,9 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:latest
         
       # STAGE 6.4: Deploy to Google Cloud Run
       - name: Authenticate to Google Cloud
@@ -194,7 +196,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           gcloud run deploy secure-cicd-app \
-            --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:${{ github.sha }} \
+            --image ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:${{ github.sha }} \
             --platform managed \
             --region us-central1 \
             --allow-unauthenticated \
