@@ -194,7 +194,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           gcloud run deploy secure-cicd-app \
-            --image ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:${{ github.sha }} \
+            --image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-secured-pipeline:${{ github.sha }} \
             --platform managed \
             --region us-central1 \
             --allow-unauthenticated \
